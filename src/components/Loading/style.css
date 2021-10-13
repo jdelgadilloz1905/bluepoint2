@@ -1,0 +1,19 @@
+/** @format */
+
+.est-loading-container {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	z-index: 10;
+}
+
+.est-loading-icon {
+	color: #2d72b7;
+	margin-top: -120px;
+}
+
+.est-loading-image {
+	font-size: 30px;
+}

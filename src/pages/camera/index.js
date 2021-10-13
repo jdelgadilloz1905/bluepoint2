@@ -15,7 +15,7 @@ import Card from 'antd/lib/card'
 
 import { CameraOutlined } from '@ant-design/icons'
 
-import { ENV_CORE, ENV_KEY_GOOGLE_VISION } from './Enviroment'
+import { ENV_CORE, ENV_KEY_GOOGLE_VISION } from '../../components/Enviroment'
 
 import './style.css'
 

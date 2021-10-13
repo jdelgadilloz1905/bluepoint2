@@ -1,0 +1,17 @@
+/** @format */
+
+.ph-edit-profile-field-input-mask {
+	max-width: 100%;
+	height: 45px;
+	border-radius: 6px;
+	font-size: 13px;
+	color: #636363;
+	opacity: 0.8;
+}
+
+.ph-edit-profile-field-input-mask:hover,
+.ph-edit-profile-field-input-mask:focus,
+.ph-edit-profile-field-input-mask:active {
+	border: 1px solid #2e72b6 !important;
+	box-shadow: none;
+}

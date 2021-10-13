@@ -1,0 +1,237 @@
+/** @format */
+
+.est-profile-img-container {
+	overflow: hidden;
+	width: 100%;
+	max-width: 150px;
+	min-height: 150px;
+	max-height: 150px;
+	margin: auto;
+	border-radius: 100%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.est-profile-img {
+	width: 100%;
+}
+
+.est-profile-img-unshown {
+	padding: 5px 10px;
+	min-width: 65px;
+	margin: 0;
+	border-radius: 100px;
+}
+
+.est-main-menu-name {
+	color: white;
+	text-transform: capitalize;
+	margin-bottom: 0;
+	font-weight: 600;
+	font-size: 17px;
+	text-overflow: ellipsis;
+	text-decoration: none;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 100%;
+	max-width: 155px;
+}
+
+.est-main-menu-name-unshown {
+	padding-left: 15px;
+	max-width: 70px;
+}
+
+.est-main-menu-collapse-container {
+	width: 100%;
+	height: 100%;
+	background-color: #2b388c;
+}
+
+.est-main-menu-collapse-container .est-detail-profile-name-img {
+	text-align: center !important;
+	height: auto !important;
+	margin: 0 !important;
+	background-color: #2b388c !important;
+	min-height: 150px !important;
+}
+
+.est-main-menu-collapse-container .est-detail-profile-name-img::after {
+	border-right: 0 !important;
+}
+
+.est-main-menu-link {
+	color: white !important;
+	transition: 0.3s ease;
+}
+
+.est-main-menu-link:hover {
+	color: #4977aa !important;
+	transition: 0.3s ease;
+}
+
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+	border-radius: 2px !important;
+}
+
+.est-main-menu-collapse-container .ant-menu-inline .ant-menu-item,
+.ant-menu-inline .ant-menu-submenu-title {
+	width: 100%;
+}
+
+.est-main-menu-collapse-container .est-main-menu-button {
+	padding: 4px 11px;
+}
+
+.est-main-menu-collapse-container .est-main-menu-button-shown {
+	padding: 4px 81px;
+}
+
+.est-main-menu-collapse-container .ant-btn-primary {
+	background-color: #2b388c;
+	border-color: #4977aa;
+	transition: 0.3s ease;
+	width: 100%;
+}
+
+.est-main-menu-collapse-container .ant-btn-primary:hover {
+	background-color: #4977aa;
+	border-color: #4977aa;
+	transition: 0.3s ease;
+}
+
+.est-main-menu-collapse-container .ant-btn-primary:focus {
+	background-color: #2b388c;
+	border-color: #4977aa;
+	transition: 0.3s ease;
+}
+
+.est-main-menu-collapse-container .ant-menu-light {
+	background-color: #2b388c;
+}
+
+.est-main-menu-collapse-container .ant-menu-item {
+	background-color: #2b388c;
+}
+
+.est-main-menu-collapse-container .ant-menu-item {
+	color: white;
+}
+
+.est-main-menu-collapse-container .ant-menu-item:hover {
+	color: #4977aa;
+}
+
+.est-main-menu-collapse-container .ant-menu-inline .ant-menu-item::after {
+	border-right: 3px solid #4977aa;
+}
+
+.est-main-menu-collapse-container
+	.ant-menu:not(.ant-menu-horizontal)
+	.ant-menu-item-selected {
+	background-color: #4977aa;
+	color: white;
+}
+
+.est-main-menu-collapse-container .ant-menu-inline-collapsed {
+	width: 60px;
+}
+
+/* .est-main-menu-collapse-container .ant-menu-vertical {
+	border: none;
+} */
+
+.est-main-menu-collapse-container .ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+	border-right: 0;
+}
+
+.est-main-menu-collapse-container
+	.ant-menu-vertical
+	.est-detail-profile-name-img {
+	padding: 0 !important;
+}
+
+.ant-drawer .ant-drawer-header {
+	background-color: #2b388c;
+	border-bottom: 0;
+}
+
+.ant-drawer .ant-drawer-title {
+	color: white;
+}
+
+.ant-drawer .ant-drawer-close {
+	color: white;
+}
+
+.ant-drawer .ant-drawer-close:hover {
+	color: #4977aa;
+}
+
+.ant-drawer .ant-drawer-body {
+	background-color: #2b388c;
+	padding: 0;
+	overflow: unset;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.ant-drawer .ant-menu {
+	background-color: #2b388c;
+	color: white;
+}
+
+.ant-drawer .ant-menu-inline {
+	border-right: 0;
+}
+
+.ant-drawer .ant-menu-item:hover {
+	color: #4977aa;
+}
+
+.ant-drawer .ant-menu-item-selected {
+	background-color: #4977aa;
+	color: white;
+}
+
+.ant-drawer .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+	background-color: #4977aa;
+	color: white;
+}
+
+.ant-drawer .ant-menu-inline .ant-menu-item::after {
+	border-right: 3px solid #4977aa;
+}
+
+.ant-drawer .est-detail-profile-name-img {
+	text-align: center !important;
+	height: auto !important;
+	margin: 0 !important;
+	background-color: #2b388c !important;
+	min-height: 220px !important;
+}
+
+.ant-drawer .est-detail-profile-name-img::after {
+	border-right: 0 !important;
+}
+
+.ant-drawer .est-profile-img {
+	max-width: 180px;
+}
+
+@media (max-width: 1060px) {
+	.est-main-menu-name {
+		font-size: 16px;
+	}
+}
+@media (max-width: 992px) {
+	.est-main-menu-name {
+		max-width: 220px;
+	}
+}

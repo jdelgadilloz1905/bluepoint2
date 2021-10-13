@@ -1,0 +1,112 @@
+/** @format */
+
+.est-auth-edit-profile-button {
+	background-color: #296120 !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	margin: 0 15px !important;
+	color: white !important;
+}
+
+.est-auth-edit-profile-button:hover {
+	background-color: #467e19 !important;
+	border-color: #b1d084 !important;
+}
+
+.ant-modal-content {
+	border-radius: 10px !important;
+}
+
+.est-auth-edit-profile-modal-title {
+	font-size: 20px;
+	color: #336722;
+	font-weight: 600;
+	padding-left: 5px;
+}
+
+.est-user-modal-container .ant-modal-close:hover {
+	color: #336722;
+}
+
+.est-user-modal-container .ant-input {
+	border-radius: 5px;
+}
+
+.est-user-modal-container .ant-input:hover {
+	border-color: #42b71e;
+}
+
+.est-user-modal-container .ant-input:focus,
+.ant-input-focused {
+	border-color: #42b71e;
+}
+
+.est-user-modal-container .ant-modal-footer {
+	display: none !important;
+}
+
+.est-login-form-text-container {
+	padding: 0 5px;
+}
+
+.est-login-form-upload-photo-container {
+	margin: auto;
+}
+
+.est-profile-edit-modal-image-text-container {
+	text-align: center;
+}
+
+.est-profile-edit-modal-image-container {
+	overflow: hidden;
+	width: 100%;
+	max-width: 150px;
+	min-height: 150px;
+	max-height: 150px;
+	margin: auto;
+	border-radius: 100%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.est-profile-edit-modal-image {
+	width: 100%;
+}
+
+.est-profile-edit-modal-image-text {
+	font-weight: 600;
+	color: #336722;
+	font-size: 14px;
+}
+
+.est-user-modal-button-main-container {
+	padding: 10px 0;
+}
+
+.est-user-modal-button-main {
+	background-color: #296120 !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	padding: 20px 35px !important;
+	align-items: center !important;
+	justify-content: center !important;
+	display: flex !important;
+	margin: auto;
+}
+
+.est-user-modal-button-main:hover {
+	background-color: #467e19 !important;
+	border-color: #b1d084 !important;
+}
+
+@media (max-width: 768px) {
+	.est-auth-edit-profile-modal-title {
+		font-size: 18px;
+	}
+
+	.est-login-form-text {
+		font-size: 13px;
+	}
+}

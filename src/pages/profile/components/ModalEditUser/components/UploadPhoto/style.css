@@ -1,0 +1,76 @@
+/** @format */
+
+.est-upload-image-profile-container {
+	width: 100%;
+	max-width: 220px !important;
+	height: 130px !important;
+	margin: auto;
+	padding: 10px 0;
+}
+
+.est-upload-image-profile-container .ant-upload.ant-upload-select-picture-card {
+	margin: 0 !important;
+	width: 100%;
+	max-width: 220px !important;
+	max-height: 130px !important;
+}
+
+.est-upload-image-profile-container .ant-upload-list-picture-card {
+	text-align: center !important;
+}
+
+.est-upload-image-profile-container .ant-upload-list-picture-card-container {
+	margin: 0 !important;
+}
+
+.est-upload-image-profile-container .ant-upload-select-picture-card:hover {
+	border-color: #42b71e !important;
+}
+
+.est-upload-image-profile-text-global-container {
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+}
+
+.est-upload-image-profile-text-container {
+	text-align: left;
+}
+
+.est-upload-image-profile-text-one {
+	font-size: 13px;
+	font-weight: 600;
+	color: #336722;
+	margin-bottom: 0;
+}
+
+.est-upload-image-profile-text-two {
+	font-size: 12px;
+	font-style: italic;
+	color: #bfbfbf;
+	margin-bottom: 0;
+}
+
+.est-upload-image-profile-icon-container {
+	font-size: 30px;
+	color: #467e19;
+}
+
+.est-upload-image-profile-modal-container .ant-upload-list-picture-card {
+	display: flex;
+}
+
+.est-upload-image-profile-modal-container .ant-upload-picture-card-wrapper {
+	text-align: center !important;
+}
+
+.est-upload-image-profile-modal-container .ant-modal-header {
+	border-radius: 10px 10px 0 0;
+	border-bottom: 0;
+}
+
+.est-upload-image-profile-modal-container .ant-modal-title {
+	font-size: 20px;
+	color: #336722;
+	font-weight: 600;
+}

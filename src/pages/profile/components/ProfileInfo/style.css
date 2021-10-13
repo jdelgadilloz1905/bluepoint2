@@ -1,0 +1,169 @@
+/** @format */
+
+.est-profile-info-main-container {
+	margin: 27px 0;
+}
+
+.est-profile-info-main-container .est-profile-info-responsive-button {
+	background-color: #296120;
+	border-color: #b1d084;
+	border-radius: 5px;
+	margin: 0 15px;
+}
+
+.est-profile-info-main-container .est-profile-info-responsive-button:hover {
+	background-color: #467e19;
+	border-color: #b1d084;
+}
+
+.est-profile-info-responsive-button-container {
+	display: flex;
+}
+
+.est-profile-info-container {
+	padding: 10px 0;
+}
+
+.est-profile-info-photo-global-container {
+	padding: 10px;
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+}
+
+.est-profile-info-photo-container {
+	overflow: hidden;
+	width: 100%;
+	max-width: 150px;
+	min-height: 150px;
+	max-height: 150px;
+	margin: auto;
+	border-radius: 100%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.est-profile-info-photo {
+	width: 100%;
+}
+
+.est-profile-info-photo-text {
+	font-weight: 600;
+	color: #336722;
+	font-size: 14px;
+	margin-bottom: 0;
+	padding-top: 15px;
+}
+
+.est-profile-info-box {
+	box-shadow: 1px 1px 5px 0px rgb(0 0 0 / 29%);
+	margin: 5px 10px;
+	padding: 5px 10px 0px;
+	border-radius: 5px;
+}
+
+.est-profile-info-global-title {
+	margin-bottom: 0;
+	font-weight: 600;
+	font-size: 15px;
+	padding: 5px;
+}
+
+.est-profile-info-list {
+	padding-left: 25px;
+}
+
+.est-profile-info-list li::marker {
+	color: #68a30d;
+	font-size: 20px;
+}
+
+.est-profile-info-title {
+	margin-bottom: 0;
+	color: #296120;
+	font-weight: 600;
+	font-size: 15px;
+}
+
+.est-profile-info-subtitle {
+	text-transform: capitalize;
+	margin-bottom: 0;
+	padding-bottom: 10px;
+	font-size: 14px;
+	font-weight: 100;
+}
+
+.est-profile-info-text {
+	margin-bottom: 0;
+	padding-bottom: 10px;
+	font-size: 14px;
+	font-weight: 100;
+}
+
+.est-user-update-password-form .ant-form-item {
+	margin-bottom: 15px;
+	margin-top: 5px;
+}
+
+.est-user-update-password-form .est-user-update-password-input {
+	border-radius: 5px;
+	padding: 6px 10px;
+	font-size: 14px;
+}
+
+.est-user-update-password-form .est-user-update-password-input:focus {
+	border-right-width: 0;
+	border-color: #42b71e;
+}
+
+.est-user-update-password-form .est-user-update-password-input:hover {
+	border-right-width: 0;
+	border-color: #42b71e;
+}
+
+.est-user-update-password-button-container {
+	display: flex;
+	padding: 5px 0 15px;
+}
+
+.est-user-update-password-button {
+	margin: auto;
+	background-color: #296120 !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	color: white !important;
+}
+
+.est-user-update-password-button:hover {
+	background-color: #467e19 !important;
+	border-color: #b1d084 !important;
+}
+
+@media (max-width: 1060px) {
+	.est-profile-info-title {
+		font-size: 13px;
+	}
+
+	.est-profile-info-subtitle {
+		font-size: 13px;
+	}
+
+	.est-profile-info-text {
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 620px) {
+	.est-profile-info-photo-text {
+		font-size: 12px;
+	}
+}
+
+@media (min-width: 893px) {
+	.est-profile-info-photo-global-container {
+		display: none !important;
+	}
+}

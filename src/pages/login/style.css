@@ -1,0 +1,186 @@
+/** @format */
+/** @format */
+
+.est-auth-login-global-container {
+	max-width: 1185px;
+	padding: 20px;
+	margin: auto;
+	transition: 0.4s ease;
+	min-height: calc(100vh - 190px);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.est-auth-login-main-container {
+	width: 100%;
+	text-align: center;
+}
+
+.est-auth-login-icon {
+	font-size: 70px;
+	color: #336722;
+	margin-bottom: 0;
+}
+
+.est-auth-login-title {
+	font-size: 25px;
+	color: #336722;
+	padding-bottom: 15px;
+	margin-bottom: 0;
+}
+
+.est-auth-login-subtitle {
+	font-size: 19px;
+	font-weight: 500;
+	padding-left: 5px;
+	padding-bottom: 10px;
+	font-style: italic;
+	color: #636464;
+}
+
+.est-auth-login-button-container {
+	padding-bottom: 20px;
+	margin: auto;
+	width: 100%;
+	max-width: 500px !important;
+	display: flex;
+	justify-content: center;
+	padding: 25px 0;
+}
+
+.est-auth-login-button {
+	background-color: #296120 !important;
+	align-items: center !important;
+	justify-content: center !important;
+	padding: 25px 40px !important;
+	display: flex !important;
+	border: none !important;
+	border-radius: 5px !important;
+	color: #ffffff !important;
+	font-weight: 500 !important;
+	height: 36px;
+	width: 100%;
+	max-width: 190px;
+	font-size: 14px !important;
+}
+
+.est-auth-login-button:hover {
+	background-color: #467e19 !important;
+	border-color: #b1d084 !important;
+}
+
+.est-auth-login-button-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
+}
+
+.est-auth-login-button {
+	background-color: #1f2577 !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	padding: 17px 25px !important;
+	align-items: center !important;
+	justify-content: center !important;
+	display: flex !important;
+	margin: auto;
+	color: white !important;
+}
+
+.est-auth-login-button:hover,
+.est-auth-login-button:active,
+.est-auth-login-button:focus {
+	background-color: #35638f !important;
+	border-color: #b1d084 !important;
+}
+
+@media (max-width: 1200px) {
+	.est-auth-login-icon {
+		font-size: 65px;
+	}
+
+	.est-auth-login-title {
+		font-size: 24px;
+	}
+
+	.est-auth-login-subtitle {
+		font-size: 18px;
+	}
+
+	.est-auth-login-button {
+		font-size: 13px !important;
+		padding: 25px 45px !important;
+		max-width: 185px;
+	}
+}
+
+@media (max-width: 992px) {
+	.est-auth-login-icon {
+		font-size: 60px;
+	}
+
+	.est-auth-login-title {
+		font-size: 22px;
+	}
+
+	.est-auth-login-subtitle {
+		font-size: 17px;
+	}
+
+	.est-auth-login-button {
+		padding: 25px 40px !important;
+		max-width: 175px;
+	}
+}
+
+@media (max-width: 768px) {
+	.est-auth-login-icon {
+		font-size: 55px;
+	}
+
+	.est-auth-login-title {
+		font-size: 21px;
+	}
+
+	.est-auth-login-subtitle {
+		font-size: 16px;
+	}
+
+	.est-auth-login-button {
+		padding: 22px 35px !important;
+		max-width: 160px;
+	}
+}
+
+@media (max-width: 575px) {
+	.est-auth-login-icon {
+		font-size: 50px;
+	}
+
+	.est-auth-login-title {
+		font-size: 20px;
+	}
+
+	.est-auth-login-subtitle {
+		font-size: 14px;
+	}
+
+	.est-auth-login-button {
+		padding: 22px 30px !important;
+		max-width: 150px;
+	}
+}
+
+@media (max-width: 436px) {
+	.est-auth-login-title {
+		font-size: 18px;
+	}
+
+	.est-auth-login-button {
+		max-width: 110px;
+		padding: 23px 10px !important;
+		font-size: 12px !important;
+	}
+}
