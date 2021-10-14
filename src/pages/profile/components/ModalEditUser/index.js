@@ -22,7 +22,7 @@ import { rulesValidationMask } from '../../../../../../components/Common/Inputs/
 
 import Uploadphoto from './components/UploadPhoto'
 
-import ProfileDetail from '../../services'
+import { ProfileDetail } from '../../services'
 
 import ProfileUpdate from './services'
 

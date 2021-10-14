@@ -9,7 +9,7 @@ import Loading from '../../components/Loading'
 
 import MainMenu from '../../components/MainMenu'
 
-import { ProfileDetail } from './service'
+import { ProfileDetail } from './services'
 
 import ProfileInfo from '../profile/components/ProfileInfo'
 
