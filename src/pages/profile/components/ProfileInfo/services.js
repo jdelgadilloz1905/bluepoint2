@@ -4,9 +4,9 @@ import axios from 'axios'
 
 import { notification } from 'antd'
 
-import { ENV_CORE } from '../../../../../../components/Common/Hooks/Variables/Enviroment'
+import { ENV_CORE } from '../../../../components/Enviroment'
 
-export const UpdatePassword = async (item, traduce) => {
+export const UpdatePassword = async (item) => {
 	let returnResponse
 	await axios({
 		method: 'POST',
@@ -17,8 +17,8 @@ export const UpdatePassword = async (item, traduce) => {
 			if (response.data.statusCode === 200) {
 				returnResponse = response.data
 				notification['success']({
-					message: `${traduce.service_success_title}`,
-					description: `${traduce.service_success_description}`,
+					message: `Congratulations!`,
+					description: `Password updated successfully`,
 				})
 			} else {
 				notification['warning']({
@@ -30,7 +30,7 @@ export const UpdatePassword = async (item, traduce) => {
 		.catch(() => {
 			notification['error']({
 				message: `Error`,
-				description: `${traduce.service_global_description}`,
+				description: `Check your internet connection`,
 			})
 		})
 	return returnResponse

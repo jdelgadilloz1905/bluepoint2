@@ -11,7 +11,7 @@ import MainMenu from '../../components/MainMenu'
 
 import { ProfileDetail } from './service'
 
-import ProfileInfo from './components/ProfileInfo'
+import ProfileInfo from '../profile/components/ProfileInfo'
 
 import './style.css'
 
@@ -54,8 +54,9 @@ export default function Profile() {
 							<div className='est-profile-aside-container'>
 								<MainMenu user={isDataProfile} />
 							</div>
+
 							<div className='est-profile-info-container'>
-								{/* <ProfileInfo isUserProfileInfo={isDataProfile} /> */}
+								<ProfileInfo isUserProfileInfo={isDataProfile} />
 							</div>
 						</div>
 					</div>

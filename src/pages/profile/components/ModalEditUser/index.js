@@ -52,7 +52,9 @@ export default function ModalLoginUser(props) {
 				setGlobal({ LoadingButtonProfile: false })
 				notification['warning']({
 					message: t('profile.user_data.modal_edit_user.warning_message'),
-					description: t('profile.user_data.modal_edit_user.warning_description'),
+					description: t(
+						'profile.user_data.modal_edit_user.warning_description'
+					),
 				})
 				return
 			} else {
@@ -67,11 +69,15 @@ export default function ModalLoginUser(props) {
 		}
 
 		const traduce = {
-			service_success_title: t('profile.user_data.modal_edit_user.service_success_title'),
+			service_success_title: t(
+				'profile.user_data.modal_edit_user.service_success_title'
+			),
 			service_success_description: t(
 				'profile.user_data.modal_edit_user.service_success_description'
 			),
-			service_warning_title: t('profile.user_data.modal_edit_user.service_warning_title'),
+			service_warning_title: t(
+				'profile.user_data.modal_edit_user.service_warning_title'
+			),
 			service_warning_description: t(
 				'profile.user_data.modal_edit_user.service_warning_description'
 			),
@@ -103,7 +109,9 @@ export default function ModalLoginUser(props) {
 
 	return (
 		<>
-			<Button className='est-auth-edit-profile-button' onClick={() => handleModalEditUser()}>
+			<Button
+				className='est-auth-edit-profile-button'
+				onClick={() => handleModalEditUser()}>
 				{t('profile.user_data.modal_edit_user.global_button')}
 			</Button>
 			<Modal
@@ -171,12 +179,16 @@ export default function ModalLoginUser(props) {
 								<Input
 									className={'est-auth-login-field-input'}
 									inputName={'updName'}
-									inputNameLabel={t('profile.user_data.modal_edit_user.placerholder_name')}
+									inputNameLabel={t(
+										'profile.user_data.modal_edit_user.placerholder_name'
+									)}
 									inputNameRule={true}
 									inputNameMessage={'Nombre es obligatorio.'}
 									inputNameType={'text'}
 									inputNameIcon={''}
-									inputNameRules={t('field_notifications.normal.rules_first_name')}
+									inputNameRules={t(
+										'field_notifications.normal.rules_first_name'
+									)}
 									disabled={props.isUser.modo === 'directo' ? false : true}
 								/>
 							</Col>
@@ -194,7 +206,9 @@ export default function ModalLoginUser(props) {
 									inputNameMessage={'Nombre es obligatorio.'}
 									inputNameType={'text'}
 									inputNameIcon={''}
-									inputNameRules={t('field_notifications.normal.rules_last_name')}
+									inputNameRules={t(
+										'field_notifications.normal.rules_last_name'
+									)}
 									disabled={props.isUser.modo === 'directo' ? false : true}
 								/>
 							</Col>
@@ -221,7 +235,9 @@ export default function ModalLoginUser(props) {
 								<Form.Item
 									name={'updPhone'}
 									rules={
-										rulesValidationMask[t('field_notifications.normal.rules_mask_phone')]
+										rulesValidationMask[
+											t('field_notifications.normal.rules_mask_phone')
+										]
 									}>
 									<InputMask
 										maskstyle={'est-auth-login-field-input'}

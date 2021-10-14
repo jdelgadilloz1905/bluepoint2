@@ -6,7 +6,7 @@ import notification from 'antd/lib/notification'
 
 import { ENV_CORE } from '../../../../../../components/Common/Hooks/Variables/Enviroment'
 
-export default async function ProfileUpdate(item, traduce) {
+export default async function ProfileUpdate(item) {
 	let returnResponse
 	await axios({
 		method: 'POST',
@@ -16,21 +16,21 @@ export default async function ProfileUpdate(item, traduce) {
 		.then((response) => {
 			if (response.data.statusCode === 200) {
 				notification['success']({
-					message: `${traduce.service_success_title}`,
-					description: `${traduce.service_success_description}`,
+					message: `Congratulations!`,
+					description: `Data updated correctly`,
 				})
 				returnResponse = response
 			} else {
 				notification['warning']({
-					message: `${traduce.service_warning_title}`,
-					description: `${traduce.service_warning_description}`,
+					message: `Warning:`,
+					description: `Error updating your profile data.`,
 				})
 			}
 		})
 		.catch(() => {
 			notification['error']({
 				message: `Error`,
-				description: `${traduce.service_error_description}`,
+				description: `Check your internet connection`,
 			})
 		})
 	return returnResponse

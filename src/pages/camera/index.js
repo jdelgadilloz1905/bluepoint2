@@ -42,7 +42,7 @@ export default function App() {
 		if (isLoadingButtonProfile) {
 			return (
 				<Modal
-					wrapClassName='est-upload-image-profile-modal'
+					wrapClassName='est-upload-image-camera-modal'
 					visible={isLoadingButtonProfile}
 					title=''
 					footer={null}
@@ -148,10 +148,10 @@ export default function App() {
 	}
 
 	return (
-		<div className='est-profile-info-container'>
+		<div className='est-camera-info-container'>
 			<Card bordered={false} style={{ width: 300 }}>
 				{loadingSpin()}
-				<div className='est-upload-image-profile-container'>
+				<div className='est-upload-image-camera-container'>
 					<Upload
 						accept='image/*'
 						customRequest={handleUploadImage}
@@ -161,8 +161,8 @@ export default function App() {
 						listType='picture-card'
 						className='image-upload-grid'>
 						{isFileList.length >= 1 ? null : (
-							<div className='est-upload-image-profile-text-global-container'>
-								<div className='est-upload-image-profile-icon-container'>
+							<div className='est-upload-image-camera-text-global-container'>
+								<div className='est-upload-image-camera-icon-container'>
 									<span>
 										<CameraOutlined />
 									</span>
@@ -173,7 +173,7 @@ export default function App() {
 
 					{isProgress > 0 ? <Progress percent={isProgress} /> : null}
 					<Modal
-						wrapClassName='est-upload-image-profile-modal-container'
+						wrapClassName='est-upload-image-camera-modal-container'
 						visible={isPreviewModal}
 						title='Preview'
 						footer={null}

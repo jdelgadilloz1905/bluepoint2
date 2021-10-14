@@ -1,6 +1,6 @@
 /** @format */
 
-.est-upload-image-profile-container {
+.est-upload-image-camera-container {
 	width: 100%;
 	max-width: 220px !important;
 	height: 130px !important;
@@ -8,55 +8,55 @@
 	padding: 10px 0;
 }
 
-.est-upload-image-profile-container .ant-upload.ant-upload-select-picture-card {
+.est-upload-image-camera-container .ant-upload.ant-upload-select-picture-card {
 	margin: 0 !important;
 	width: 100%;
 	max-width: 220px !important;
 	max-height: 130px !important;
 }
 
-.est-upload-image-profile-container .ant-upload-list-picture-card {
+.est-upload-image-camera-container .ant-upload-list-picture-card {
 	text-align: center !important;
 }
 
-.est-upload-image-profile-container .ant-upload-list-picture-card-container {
+.est-upload-image-camera-container .ant-upload-list-picture-card-container {
 	margin: 0 !important;
 }
 
-.est-upload-image-profile-container .ant-upload-select-picture-card:hover {
+.est-upload-image-camera-container .ant-upload-select-picture-card:hover {
 	border-color: #42b71e !important;
 }
 
-.est-upload-image-profile-text-global-container {
+.est-upload-image-camera-text-global-container {
 	display: flex;
 	align-items: center;
 	padding: 0 10px;
 }
 
-.est-upload-image-profile-text-container {
+.est-upload-image-camera-text-container {
 	text-align: left;
 }
 
-.est-upload-image-profile-text-one {
+.est-upload-image-camera-text-one {
 	font-size: 13px;
 	font-weight: 600;
 	color: #336722;
 	margin-bottom: 0;
 }
 
-.est-upload-image-profile-text-two {
+.est-upload-image-camera-text-two {
 	font-size: 12px;
 	font-style: italic;
 	color: #bfbfbf;
 	margin-bottom: 0;
 }
 
-.est-upload-image-profile-icon-container {
+.est-upload-image-camera-icon-container {
 	font-size: 30px;
 	color: #467e19;
 }
 
-.est-upload-image-profile-modal-container {
+.est-upload-image-camera-modal-container {
 	display: flex;
 	text-align: center !important;
 	border-radius: 10px 10px 0 0;
@@ -66,7 +66,7 @@
 	font-weight: 600;
 }
 
-.est-upload-image-profile-modal {
+.est-upload-image-camera-modal {
 	display: flex;
 	text-align: center !important;
 	border-radius: 10px 10px 0 0;
@@ -76,7 +76,7 @@
 	font-weight: 600;
 }
 
-.est-profile-info-container {
+.est-camera-info-container {
 	padding: 40px 0;
 	display: flex;
 	box-shadow: 4px 4px 11px 4px rgba(163, 163, 163, 0.98);
