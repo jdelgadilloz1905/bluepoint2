@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import notification from 'antd/lib/notification'
 
-import { ENV_CORE } from '../../../../../../components/Common/Hooks/Variables/Enviroment'
+import { ENV_CORE } from '../../../../components/Enviroment'
 
 export default async function ProfileUpdate(item) {
 	let returnResponse

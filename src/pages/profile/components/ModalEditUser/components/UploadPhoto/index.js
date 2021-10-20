@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react'
 
-import { useTranslation } from 'react-i18next'
-
 import { setGlobal } from 'reactn'
 
 import axios from 'axios'
@@ -15,12 +13,12 @@ import message from 'antd/lib/message'
 
 import { UserAddOutlined } from '@ant-design/icons'
 
-import { ENV_CORE } from '../../../../../../../../components/Common/Hooks/Variables/Enviroment'
+import { ENV_CORE } from '../../../../../../components/Enviroment'
 
 import './style.css'
 
 export default function UploadImageProfile(props) {
-	const { t } = useTranslation()
+
 	const [isPreviewModal, setPreviewModal] = useState(false)
 	const [isFileList, setFileList] = useState([])
 	const [isPreviewImg, setPreviewImg] = useState('')
@@ -55,13 +53,13 @@ export default function UploadImageProfile(props) {
 			if (response.data.statusCode === 200) {
 				props.addItemImage(response.data.imageInfo[0])
 				onSuccess('Ok')
-				message.success(t('profile.user_data.modal_edit_user.upload_photo.message_success'))
+				message.success('Image upload was successful.')
 			} else {
-				message.error(t('profile.user_data.modal_edit_user.upload_photo.message_fail'))
+				message.error('Image loading failure.')
 			}
 		} catch (err) {
 			onError({ err })
-			message.error(t('profile.user_data.modal_edit_user.upload_photo.message_fail'))
+			message.error('Image loading failure.')
 		}
 		setGlobal({ LoadingButtonProfile: false })
 	}
@@ -85,11 +83,11 @@ export default function UploadImageProfile(props) {
 					<div className='est-upload-image-profile-text-global-container'>
 						<div className='est-upload-image-profile-text-container'>
 							<h3 className='est-upload-image-profile-text-one'>
-								{t('profile.user_data.modal_edit_user.upload_photo.placeholder_title')}{' '}
+								{'Click to upload image'}{' '}
 								{props.title}
 							</h3>
 							<h2 className='est-upload-image-profile-text-two'>
-								{t('profile.user_data.modal_edit_user.upload_photo.placeholder_subtitle')}{' '}
+								{'Recommended image size'}{' '}
 								300x300
 							</h2>
 						</div>
@@ -105,7 +103,7 @@ export default function UploadImageProfile(props) {
 			<Modal
 				wrapClassName='est-upload-image-profile-modal-container'
 				visible={isPreviewModal}
-				title={t('profile.user_data.modal_edit_user.upload_photo.modal_title')}
+				title={'Preview:'}
 				footer={null}
 				onCancel={() => setPreviewModal(false)}>
 				{isPreviewImg && <img alt='example' style={{ width: '100%' }} src={isPreviewImg} />}
