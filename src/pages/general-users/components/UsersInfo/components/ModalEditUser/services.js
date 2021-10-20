@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import notification from 'antd/lib/notification'
 
-import { ENV_CORE } from '../../../../components/Enviroment'
+import { ENV_CORE } from '../../../../../../components/Enviroment'
 
 export default async function ProfileUpdate(item) {
 	let returnResponse
@@ -22,7 +22,7 @@ export default async function ProfileUpdate(item) {
 				returnResponse = response
 			} else {
 				notification['warning']({
-					message: `Warning:`,
+					message: `Warning`,
 					description: `Error updating your profile data.`,
 				})
 			}

@@ -1,8 +1,6 @@
 /** @format */
 import React, { useState } from 'react'
 
-import { useTranslation } from 'react-i18next'
-
 import { setGlobal, useGlobal } from 'reactn'
 
 import Modal from 'antd/lib/modal'
@@ -12,13 +10,13 @@ import notification from 'antd/lib/notification'
 import Row from 'antd/lib/row'
 import Col from 'antd/lib/col'
 
-import Input from '../../../../../../components/Common/Inputs/Normal'
-import Image from '../../../../../../components/Common/Image'
-import InputMask from '../../../../../../components/Common/Inputs/InputMask'
+import Input from '../../../../components/Inputs/Normal'
+import Image from '../../../../components/Image'
+import InputMask from '../../../../components/Inputs/InputMask'
 
-import { ENV_CORE } from '../../../../../../components/Common/Hooks/Variables/Enviroment'
+import { ENV_CORE } from '../../../../components/Enviroment'
 
-import { rulesValidationMask } from '../../../../../../components/Common/Inputs/InputMask/rules'
+import { rulesValidationMask } from '../../../../components/Inputs/InputMask/rules'
 
 import Uploadphoto from './components/UploadPhoto'
 
@@ -29,7 +27,6 @@ import ProfileUpdate from './services'
 import './style.css'
 
 export default function ModalLoginUser(props) {
-	const { t } = useTranslation()
 	const [form] = Form.useForm()
 	const [isModalUser, setModalUser] = useState(false)
 	const [isNewPhoto, setNewPhoto] = useState(null)
@@ -45,16 +42,14 @@ export default function ModalLoginUser(props) {
 
 	const handleEditUser = async (item) => {
 		item.updPhone = item.updPhone.replace(/[+()/\s/]/g, '')
-		item.updPerfil = props.isUser.perfil
+		item.updPerfil = props.isUser.profile
 		setGlobal({ LoadingButtonProfile: true })
 		if (!props.isUser.foto) {
 			if (!isNewPhoto) {
 				setGlobal({ LoadingButtonProfile: false })
 				notification['warning']({
-					message: t('profile.user_data.modal_edit_user.warning_message'),
-					description: t(
-						'profile.user_data.modal_edit_user.warning_description'
-					),
+					message: 'Warning',
+					description: 'You must upload an image for the profile.',
 				})
 				return
 			} else {
@@ -64,29 +59,11 @@ export default function ModalLoginUser(props) {
 			if (isNewPhoto) {
 				item.updFoto = isNewPhoto
 			} else {
-				item.updFoto = props.isUser.foto
+				item.updFoto = props.isUser.photo
 			}
 		}
 
-		const traduce = {
-			service_success_title: t(
-				'profile.user_data.modal_edit_user.service_success_title'
-			),
-			service_success_description: t(
-				'profile.user_data.modal_edit_user.service_success_description'
-			),
-			service_warning_title: t(
-				'profile.user_data.modal_edit_user.service_warning_title'
-			),
-			service_warning_description: t(
-				'profile.user_data.modal_edit_user.service_warning_description'
-			),
-			service_error_description: t(
-				'profile.user_data.modal_edit_user.service_error_description'
-			),
-		}
-
-		await ProfileUpdate(item, traduce).then((response) => {
+		await ProfileUpdate(item).then((response) => {
 			if (response) {
 				ProfileDetail(item.updId).then((responseUser) => {
 					setGlobal({
@@ -112,7 +89,7 @@ export default function ModalLoginUser(props) {
 			<Button
 				className='est-auth-edit-profile-button'
 				onClick={() => handleModalEditUser()}>
-				{t('profile.user_data.modal_edit_user.global_button')}
+				Edit
 			</Button>
 			<Modal
 				forceRender
@@ -125,47 +102,27 @@ export default function ModalLoginUser(props) {
 				okText='Confirmar'
 				cancelButtonProps={{ style: { display: 'none' } }}
 				okButtonProps={{ style: { display: 'none' } }}>
-				<h3 className='est-auth-edit-profile-modal-title'>
-					{t('profile.user_data.modal_edit_user.title')}
-				</h3>
+				<h3 className='est-auth-edit-profile-modal-title'>Edit user data</h3>
 				<Form
 					form={form}
 					initialValues={{
-						updName: props.isUser.nombre,
-						updLast: props.isUser.apellido,
+						updName: props.isUser.name,
 						updEmail: props.isUser.email,
 						updId: props.isUser.id,
-						updPhone: props.isUser.telefono,
-						updIdioma: 'en',
+						updPhone: props.isUser.phone,
 					}}
 					name='user_login'
 					onFinish={handleEditUser}>
 					<div className='est-auth-login-form-container'>
 						<Row>
 							<Col span={12} className='est-login-form-text-container'>
-								<h4 className='est-login-form-text'>
-									{t('profile.user_data.modal_edit_user.input_lan')}
-								</h4>
-								<Input
-									className={'est-auth-login-field-input'}
-									inputName={'updIdioma'}
-									inputNameLabel={'Idioma'}
-									inputNameRule={true}
-									inputNameMessage={'Nombre es obligatorio.'}
-									inputNameType={'text'}
-									inputNameIcon={''}
-									inputNameRules={'rulesName'}
-									disabled={true}
-								/>
-							</Col>
-							<Col span={12} className='est-login-form-text-container'>
 								<h4 className='est-login-form-text'>ID</h4>
 								<Input
 									className={'est-auth-login-field-input'}
 									inputName={'updId'}
-									inputNameLabel={'Nombre'}
+									inputNameLabel={'Name'}
 									inputNameRule={true}
-									inputNameMessage={'Nombre es obligatorio.'}
+									inputNameMessage={'Name is required.'}
 									inputNameType={'number'}
 									inputNameIcon={''}
 									inputNameRules={'rulesName'}
@@ -173,72 +130,38 @@ export default function ModalLoginUser(props) {
 								/>
 							</Col>
 							<Col span={12} className='est-login-form-text-container'>
-								<h4 className='est-login-form-text'>
-									{t('profile.user_data.modal_edit_user.input_name')}
-								</h4>
+								<h4 className='est-login-form-text'>Name</h4>
 								<Input
 									className={'est-auth-login-field-input'}
 									inputName={'updName'}
-									inputNameLabel={t(
-										'profile.user_data.modal_edit_user.placerholder_name'
-									)}
+									inputNameLabel={'Name'}
 									inputNameRule={true}
-									inputNameMessage={'Nombre es obligatorio.'}
+									inputNameMessage={'Name is required.'}
 									inputNameType={'text'}
 									inputNameIcon={''}
-									inputNameRules={t(
-										'field_notifications.normal.rules_first_name'
-									)}
-									disabled={props.isUser.modo === 'directo' ? false : true}
+									inputNameRules={'rulesFirstNameEN'}
 								/>
 							</Col>
-							<Col span={12} className='est-login-form-text-container'>
-								<h4 className='est-login-form-text'>
-									{t('profile.user_data.modal_edit_user.input_last_name')}
-								</h4>
-								<Input
-									className={'est-auth-login-field-input'}
-									inputName={'updLast'}
-									inputNameLabel={t(
-										'profile.user_data.modal_edit_user.placerholder_last_name'
-									)}
-									inputNameRule={true}
-									inputNameMessage={'Nombre es obligatorio.'}
-									inputNameType={'text'}
-									inputNameIcon={''}
-									inputNameRules={t(
-										'field_notifications.normal.rules_last_name'
-									)}
-									disabled={props.isUser.modo === 'directo' ? false : true}
-								/>
-							</Col>
+
 							<Col span={24} className='est-login-form-text-container'>
-								<h4 className='est-login-form-text'>
-									{t('profile.user_data.modal_edit_user.input_email')}
-								</h4>
+								<h4 className='est-login-form-text'>E-mail</h4>
 								<Input
 									className={'est-auth-login-field-input'}
 									inputName={'updEmail'}
-									inputNameLabel={'Correo electrónico'}
+									inputNameLabel={'Email'}
 									inputNameRule={true}
-									inputNameMessage={'E-mail es obligatorio'}
+									inputNameMessage={'E-mail ir required'}
 									inputNameType={'text'}
 									inputNameIcon={''}
-									inputNameRules={t('field_notifications.normal.rules_email')}
+									inputNameRules={'rulesEmailEN'}
 									disabled={true}
 								/>
 							</Col>
 							<Col span={24} className='est-login-form-text-container'>
-								<h4 className='est-login-form-text'>
-									{t('profile.user_data.modal_edit_user.input_phone')}
-								</h4>
+								<h4 className='est-login-form-text'>Phone</h4>
 								<Form.Item
 									name={'updPhone'}
-									rules={
-										rulesValidationMask[
-											t('field_notifications.normal.rules_mask_phone')
-										]
-									}>
+									rules={rulesValidationMask['rulesPhoneEN']}>
 									<InputMask
 										maskstyle={'est-auth-login-field-input'}
 										mask='+(1) 999 999 9999'
@@ -252,15 +175,15 @@ export default function ModalLoginUser(props) {
 									addItemImage={(data) => handleAddProfileImage(data)}
 								/>
 								<div className='est-profile-edit-modal-image-text-container'>
-									{props.isUser.foto && (
+									{props.isUser.photo && (
 										<>
 											<h4 className='est-profile-edit-modal-image-text'>
-												{t('profile.user_data.modal_edit_user.photo_title')}
+												Current profile picture:
 											</h4>
 											<div className='est-profile-edit-modal-image-container'>
 												<Image
 													classImg={'est-profile-edit-modal-image'}
-													image={props.isUser.foto}
+													image={props.isUser.photo}
 													alt={'Imagen Profile'}
 													title={'Imagen Profile'}
 												/>
@@ -278,7 +201,7 @@ export default function ModalLoginUser(props) {
 										type='primary'
 										htmlType={'submit'}
 										loading={isLoading}>
-										{t('profile.user_data.modal_edit_user.button')}
+										Accept
 									</Button>
 								</div>
 							</div>

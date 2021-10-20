@@ -11,7 +11,7 @@ export const ProfileDetail = async (item) => {
 	await axios({
 		method: 'POST',
 		url: `${ENV_CORE}/api/auth/datos-user`,
-		data: { idUser: item },
+		data: { conId: item },
 	})
 		.then((response) => {
 			if (response.data.statusCode === 200) {

@@ -28,7 +28,7 @@ const servicesLogin = {
 						description: `You have successfully logged in.`,
 					})
 					returnResponse = {
-						nombre: response.data.userInfo.name,
+						name: response.data.userInfo.name,
 						id: response.data.userInfo.id,
 						email: response.data.userInfo.email,
 						photo: response.data.userInfo.photo,

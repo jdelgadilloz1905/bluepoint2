@@ -100,20 +100,20 @@ export default function MainMenu(props) {
 						</h3>
 					</Menu.Item>
 
-					<Menu.Item key='/profile/user-data' icon={<UserOutlined />}>
-						<Link to='/profile/user-data' className='est-main-menu-link'>
+					<Menu.Item key='/profile' icon={<UserOutlined />}>
+						<Link to='/profile' className='est-main-menu-link'>
 							Personal information
 						</Link>
 					</Menu.Item>
 
-					<Menu.Item key='/profile/general-users' icon={<TeamOutlined />}>
-						<Link to='/profile/general-users' className='est-main-menu-link'>
+					<Menu.Item key='/general-users' icon={<TeamOutlined />}>
+						<Link to='/general-users' className='est-main-menu-link'>
 							Patients
 						</Link>
 					</Menu.Item>
 
-					<Menu.Item key='/profile/user-data' icon={<SafetyOutlined />}>
-						<Link to='/profile/user-data' className='est-main-menu-link'>
+					<Menu.Item key='/general-insurance' icon={<SafetyOutlined />}>
+						<Link to='/general-insurance' className='est-main-menu-link'>
 							Insurance
 						</Link>
 					</Menu.Item>
@@ -135,7 +135,7 @@ export default function MainMenu(props) {
 							key='/profile-image'
 							className='est-detail-profile-name-img'>
 							<div className='est-profile-img-container'>
-								{props.user.foto ? (
+								{props.user.photo ? (
 									<Image
 										classImg={`${
 											isCollapse

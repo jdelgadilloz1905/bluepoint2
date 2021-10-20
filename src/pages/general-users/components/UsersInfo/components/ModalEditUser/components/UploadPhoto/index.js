@@ -13,7 +13,7 @@ import message from 'antd/lib/message'
 
 import { UserAddOutlined } from '@ant-design/icons'
 
-import { ENV_CORE } from '../../../../../../components/Enviroment'
+import { ENV_CORE } from '../../../../../../../../components/Enviroment'
 
 import './style.css'
 
@@ -86,10 +86,11 @@ export default function UploadImageProfile(props) {
 					<div className='est-upload-image-profile-text-global-container'>
 						<div className='est-upload-image-profile-text-container'>
 							<h3 className='est-upload-image-profile-text-one'>
-								{'Click to upload image'} {props.title}
+								Click to upload image
+								{props.title}
 							</h3>
 							<h2 className='est-upload-image-profile-text-two'>
-								{'Recommended image size'} 300x300
+								Recommended image size 300x300
 							</h2>
 						</div>
 						<div className='est-upload-image-profile-icon-container'>
