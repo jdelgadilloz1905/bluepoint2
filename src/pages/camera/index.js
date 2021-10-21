@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import axios from 'axios'
 
@@ -13,21 +13,50 @@ import Spin from 'antd/lib/spin'
 
 import Card from 'antd/lib/card'
 
+import { Form, Select } from 'antd'
+
 import { CameraOutlined } from '@ant-design/icons'
 
-import { ENV_CORE, ENV_KEY_GOOGLE_VISION } from '../../components/Enviroment'
+import {
+	ENV_CORE,
+	ENV_KEY_GOOGLE_VISION,
+	ENV_UPLOAD_IMAGE,
+} from '../../components/Enviroment'
+import HeadDescription from '../../components/HeadDescription'
+
+import servicesCamera from './services'
 
 import './style.css'
 
-export default function App() {
+export default function App(props) {
 	const [isFileList, setFileList] = useState([])
 	const [isPreviewModal, setPreviewModal] = useState(false)
 	const [isPreviewImg, setPreviewImg] = useState('')
 	const [isProgress, setProgress] = useState(0)
 	const [isLoadingButtonProfile, setLoadingButtonProfile] = useState(false)
 	const [isTexto, setTexto] = useState('')
+	const [isInsurance, setInsurance] = useState(null) //todos los seguros
+	const [isDatosuser, setDatosUser] = useState(null) //datos del paciente
+	const [isSelectInsurance, setSelectInsurance] = useState(null) //seguro seleccionado
+	const [isPosition, setPosition] = useState(null)
+	const { Option } = Select
 
 	//const { Dragger } = Upload
+	useEffect(() => {
+		servicesCamera.getAllInsurence().then((response) => {
+			if (response) {
+				setInsurance(response)
+			}
+		})
+
+		servicesCamera.getDatosPatient(props.match.params.id).then((response) => {
+			if (response) {
+				setDatosUser(response)
+			} else {
+				window.location.href = '/'
+			}
+		})
+	}, [])
 
 	const handleOnChangeImage = ({ fileList }) => {
 		setFileList(fileList)
@@ -69,8 +98,15 @@ export default function App() {
 			},
 		}
 		try {
+			//LOCAL
+			// const response = await axios.post(
+			// 	`${ENV_CORE}/api/patient/upload-image`,
+			// 	data,
+			// 	config
+			// )
+			//PRUEBA
 			const response = await axios.post(
-				`${ENV_CORE}/api/products/upload-image`,
+				`${ENV_UPLOAD_IMAGE}/api/products/upload-image`,
 				data,
 				config
 			)
@@ -93,6 +129,7 @@ export default function App() {
 	}
 
 	const submitToGoogle = async (url) => {
+		console.log('envio los datos para la extraccion')
 		try {
 			setLoadingButtonProfile(true)
 			let data = {
@@ -112,7 +149,7 @@ export default function App() {
 						],
 						image: {
 							source: {
-								imageUri: `${ENV_CORE}/${url}`,
+								imageUri: `${ENV_UPLOAD_IMAGE}/${url}`,
 							},
 						},
 					},
@@ -131,9 +168,17 @@ export default function App() {
 					},
 				},
 			}).then((r) => {
-				//console.log(r)
 				const array = r.data.responses[0].textAnnotations
-				setTexto(array[0].description)
+
+				/*=============================================
+					DEPENDIENDO DE LA SELECCION DEL SEGURO BUSCA
+					LA POSICION EXACTA PARA EXTRAER EL ID
+					=============================================*/
+
+				console.log('seguros ', isInsurance)
+				//console.log('la posicion para extraer es ', filterList)
+				console.log('posicion es ', isPosition)
+				setTexto(array[isPosition].description)
 				/*for (let x = 1; x < array.length; x++) {
 					console.warn('resultado arriba ', array[x])
 					if (array[x].description.includes('-')) {
@@ -147,48 +192,88 @@ export default function App() {
 		} catch (error) {}
 	}
 
-	return (
-		<div className='est-camera-info-container'>
-			<Card bordered={false} style={{ width: 300 }}>
-				{loadingSpin()}
-				<div className='est-upload-image-camera-container'>
-					<Upload
-						accept='image/*'
-						customRequest={handleUploadImage}
-						onChange={handleOnChangeImage}
-						onPreview={handlePreview}
-						onRemove={handleImageDelete}
-						listType='picture-card'
-						className='image-upload-grid'>
-						{isFileList.length >= 1 ? null : (
-							<div className='est-upload-image-camera-text-global-container'>
-								<div className='est-upload-image-camera-icon-container'>
-									<span>
-										<CameraOutlined />
-									</span>
-								</div>
-							</div>
-						)}
-					</Upload>
+	const handleChangeOption = (value) => {
+		setSelectInsurance(value)
+		let filterList = isInsurance.filter((data) => {
+			data.id = data.id
+			return data.id === value
+			//return data.id.indexOf(value) !== -1
+		})
+		setPosition(filterList[0].position)
+		// console.log('la posicion para extraer es ', filterList)
+		// console.log('seleccionado ', value)
+		console.log('seguros ', isInsurance)
+	}
 
-					{isProgress > 0 ? <Progress percent={isProgress} /> : null}
-					<Modal
-						wrapClassName='est-upload-image-camera-modal-container'
-						visible={isPreviewModal}
-						title='Preview'
-						footer={null}
-						onCancel={() => setPreviewModal(false)}>
-						{isPreviewImg && (
-							<img
-								alt='visionCloud'
-								style={{ width: '100%' }}
-								src={isPreviewImg}
-							/>
-						)}
-					</Modal>
-				</div>
-			</Card>
-			{isTexto !== '' ? `${isTexto}` : 'Extracted text'}
-		</div>
+	return (
+		<>
+			<HeadDescription
+				title={`BluePoint2 - ${isDatosuser ? isDatosuser.name : ''}`}
+				name={'description'}
+				content={'Insurance Site'}
+			/>
+			<div className='est-camera-info-container'>
+				<p>{`Hello ${
+					isDatosuser ? isDatosuser.name : ''
+				}, please select the insurance and take a photo of the passport`}</p>
+
+				<Card bordered={false} style={{ width: 300 }}>
+					{loadingSpin()}
+					{isInsurance && (
+						<Form>
+							<h4 className='est-login-form-text'>Select insurance</h4>
+							<div className='est-create-user-modal-selector'>
+								<Form.Item name='insurance'>
+									<Select onChange={handleChangeOption}>
+										{isInsurance.map((item, index) => (
+											<Option value={item.id} key={index}>
+												{item.name}
+											</Option>
+										))}
+									</Select>
+								</Form.Item>
+							</div>
+						</Form>
+					)}
+					<div className='est-upload-image-camera-container'>
+						<Upload
+							accept='image/*'
+							customRequest={handleUploadImage}
+							onChange={handleOnChangeImage}
+							onPreview={handlePreview}
+							onRemove={handleImageDelete}
+							listType='picture-card'
+							className='image-upload-grid'>
+							{isFileList.length >= 1 ? null : (
+								<div className='est-upload-image-camera-text-global-container'>
+									<div className='est-upload-image-camera-icon-container'>
+										<span>
+											<CameraOutlined />
+										</span>
+									</div>
+								</div>
+							)}
+						</Upload>
+
+						{isProgress > 0 ? <Progress percent={isProgress} /> : null}
+						<Modal
+							wrapClassName='est-upload-image-camera-modal-container'
+							visible={isPreviewModal}
+							title='Preview'
+							footer={null}
+							onCancel={() => setPreviewModal(false)}>
+							{isPreviewImg && (
+								<img
+									alt='visionCloud'
+									style={{ width: '100%' }}
+									src={isPreviewImg}
+								/>
+							)}
+						</Modal>
+					</div>
+				</Card>
+				{isTexto !== '' ? `${isTexto}` : 'Extracted text'}
+			</div>
+		</>
 	)
 }

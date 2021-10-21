@@ -8,10 +8,11 @@ import { ENV_CORE } from '../../components/Enviroment'
 
 export const ProfileDetail = async (item) => {
 	let returnResponse
+
 	await axios({
 		method: 'POST',
 		url: `${ENV_CORE}/api/auth/datos-user`,
-		data: { conId: item },
+		data: { idUser: item },
 	})
 		.then((response) => {
 			if (response.data.statusCode === 200) {
@@ -29,5 +30,6 @@ export const ProfileDetail = async (item) => {
 				description: 'Check your internet connection',
 			})
 		})
+
 	return returnResponse
 }

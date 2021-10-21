@@ -90,31 +90,3 @@ export const UpdatePassword = async (item) => {
 		})
 	return returnResponse
 }
-
-export const GetAllPatientInfo = async () => {
-	console.log('Busco los datos del paciente')
-	let returnResponse
-	await axios({
-		method: 'POST',
-		url: `${ENV_CORE}/api/patients/all-patients`,
-	})
-		.then((response) => {
-			if (response.data.statusCode === 200) {
-				returnResponse = response.data.userInfo
-				console.log('resultado de pacientes ', returnResponse)
-			} else {
-				notification['warning']({
-					message: 'Advertencia:',
-					description:
-						'Error en Servicio: REACT_APP_SERVICE_CORE - PatientsDetail',
-				})
-			}
-		})
-		.catch(() => {
-			notification['error']({
-				message: `Error`,
-				description: 'Verifique su conexión a Internet',
-			})
-		})
-	return returnResponse
-}

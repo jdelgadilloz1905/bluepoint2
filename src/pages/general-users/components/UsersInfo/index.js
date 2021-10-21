@@ -18,12 +18,7 @@ import ModalCreateUser from './components/ModalCreateUser'
 
 import './style.css'
 
-import {
-	GetAllPatientInfo,
-	GetAllUsers,
-	ActivateUser,
-	UpdatePassword,
-} from './services'
+import { GetAllUsers, ActivateUser, UpdatePassword } from './services'
 
 const Usersinfo = () => {
 	const [isMobile, setMobile] = useState(false)
@@ -75,7 +70,7 @@ const Usersinfo = () => {
 
 		await ActivateUser(actionUser).then((response) => {
 			if (response) {
-				GetAllPatientInfo(isGetAllUsers).then((response) => {
+				GetAllUsers(isGetAllUsers).then((response) => {
 					if (response) {
 						setAllUsers(response)
 					}
@@ -217,7 +212,7 @@ const Usersinfo = () => {
 									</span>
 									<span
 										className={
-											item.estado === '1'
+											item.state === '1'
 												? 'est-general-list-users-title-state-active'
 												: 'est-general-list-users-title-state-disable'
 										}></span>
@@ -262,7 +257,7 @@ const Usersinfo = () => {
 									<span className='est-general-list-users-list-main-title-responsive'>
 										Complete name:
 									</span>
-									{item.nombre} {item.apellido}
+									{item.name} {item.last}
 								</h4>
 							</Col>
 							<Col
@@ -371,7 +366,7 @@ const Usersinfo = () => {
 										<span className='est-manage-users-modal-title-span'>
 											Creation date:
 										</span>{' '}
-										{isModalInfo.fecha_creacion}
+										{isModalInfo.date_creation}
 									</h4>
 									<h4 className='est-manage-users-modal-title'>
 										<span className='est-manage-users-modal-title-span'>
@@ -390,18 +385,18 @@ const Usersinfo = () => {
 										<span className='est-manage-users-modal-title-span'>
 											Phone:
 										</span>{' '}
-										{isModalInfo.telefono}
+										{isModalInfo.phone}
 									</h4>
 									<h4 className='est-manage-users-modal-title'>
 										<span className='est-manage-users-modal-title-span'>
 											Last login:
 										</span>{' '}
-										{isModalInfo.ultimo_login}
+										{isModalInfo.last_login}
 									</h4>
 								</div>
 							</Col>
 
-							{/* {isModalInfo.modo === 'directo' && (
+							{isModalInfo.modo === 'directo' && (
 								<Col
 									xs={24}
 									sm={24}
@@ -411,9 +406,7 @@ const Usersinfo = () => {
 									className='est-manage-users-modal-password-global-container'>
 									<div className='est-manage-users-modal-password-main-container'>
 										<h4 className='est-manage-users-modal-password-title'>
-											{t(
-												'profile.general_users.users_info.modal_user_pass_title'
-											)}
+											Change password
 										</h4>
 										<Form
 											form={update_password}
@@ -422,49 +415,35 @@ const Usersinfo = () => {
 											<InputNormal
 												className={'est-manage-users-modal-password-input'}
 												inputName={'regPassword'}
-												inputNameLabel={t(
-													'profile.general_users.users_info.modal_user_pass_placholder'
-												)}
+												inputNameLabel={'Password'}
 												inputNameRule={true}
-												inputNameMessage={t(
-													'profile.general_users.users_info.modal_user_pass_message'
-												)}
+												inputNameMessage={'Enter your password'}
 												inputNameType={'password'}
 												inputNameIcon={''}
-												inputNameRules={t(
-													'field_notifications.normal.rules_password'
-												)}
+												inputNameRules={'rulesPasswordEN'}
 											/>
 											<InputNormal
 												className={'est-manage-users-modal-password-input'}
 												inputName={'confirm'}
-												inputNameLabel={t(
-													'profile.general_users.users_info.modal_user_pass_confirm_placeholder'
-												)}
+												inputNameLabel={'Confirm password'}
 												inputNameRule={true}
-												inputNameMessage={t(
-													'profile.general_users.users_info.modal_user_pass_message'
-												)}
+												inputNameMessage={'Enter your password'}
 												inputNameType={'password'}
 												inputNameIcon={''}
 												dependencies={['password']}
 												hasFeedback
-												inputNameRules={t(
-													'field_notifications.normal.rules_confirm_password'
-												)}
+												inputNameRules={'confirmPasswordEN'}
 											/>
 											<Button
 												className='est-manage-users-modal-password-button'
 												htmlType={'submit'}
 												loading={isLoading}>
-												{t(
-													'profile.general_users.users_info.modal_user_pass_title'
-												)}
+												Change password
 											</Button>
 										</Form>
 									</div>
 								</Col>
-							)} */}
+							)}
 						</Row>
 					)}
 					<div className='est-manage-users-modal-button-container'>

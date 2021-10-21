@@ -100,7 +100,7 @@ export default function ProfileInfo(props) {
 									<h3 className='est-profile-info-title'>User:</h3>
 								</li>
 								<h4 className='est-profile-info-subtitle'>
-									{props.isUserProfileInfo.name}
+									{props.isUserProfileInfo.name} {props.isUserProfileInfo.last}
 								</h4>
 								<li>
 									<h3 className='est-profile-info-title'>Email:</h3>
@@ -118,7 +118,7 @@ export default function ProfileInfo(props) {
 									<h3 className='est-profile-info-title'>Creation date:</h3>
 								</li>
 								<h4 className='est-profile-info-text'>
-									{props.isUserProfileInfo.date_create}
+									{props.isUserProfileInfo.date_creation}
 								</h4>
 								<li>
 									<h3 className='est-profile-info-title'>Last login:</h3>

@@ -15,7 +15,6 @@ import './style.css'
 export default function LoginUser() {
 	const [form] = Form.useForm()
 	const [isLoading, setLoading] = useState(false)
-	const [isSocialLogin, setSocialLogin] = useState('null')
 
 	const handleLoginUser = async (item) => {
 		setLoading(true)
@@ -73,7 +72,7 @@ export default function LoginUser() {
 						<div>
 							<div className='est-auth-login-button-container'>
 								<Button
-									onClick={() => setSocialLogin(null)}
+									onClick={''}
 									className='est-auth-login-button'
 									type='primary'
 									htmlType={'submit'}

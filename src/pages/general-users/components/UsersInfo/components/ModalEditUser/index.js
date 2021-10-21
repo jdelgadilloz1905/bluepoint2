@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 import { setGlobal, useGlobal } from 'reactn'
 
-import { Modal, Form, Button, notification, Row, Col, Select } from 'antd'
+import { Modal, Form, Button, notification, Row, Col } from 'antd'
 
 import { EditOutlined } from '@ant-design/icons'
 
@@ -14,7 +14,6 @@ import InputMask from '../../../../../../components/Inputs/InputMask'
 import { ENV_CORE } from '../../../../../../components/Enviroment'
 
 import { rulesValidationMask } from '../../../../../../components/Inputs/InputMask/rules'
-import { rulesValidation } from '../../../../../../components/Inputs/Normal/rules'
 
 import Uploadphoto from './components/UploadPhoto'
 
@@ -26,7 +25,7 @@ import './style.css'
 
 export default function ModalLoginUser(props) {
 	const [form] = Form.useForm()
-	const { Option } = Select
+	// const { Option } = Select
 	const [isModalUser, setModalUser] = useState(false)
 	const [isNewPhoto, setNewPhoto] = useState(null)
 	const [isLoading] = useGlobal('LoadingButtonProfile')
@@ -115,7 +114,7 @@ export default function ModalLoginUser(props) {
 						onFinish={handleEditUser}>
 						<div className='est-auth-login-form-container'>
 							<Row>
-								<Col span={12} className='est-login-form-text-container'>
+								<Col span={2} className='est-login-form-text-container'>
 									<h4 className='est-login-form-text'>ID</h4>
 									<Input
 										className={'est-auth-login-field-input'}
@@ -129,7 +128,7 @@ export default function ModalLoginUser(props) {
 										disabled={true}
 									/>
 								</Col>
-								<Col span={12} className='est-login-form-text-container'>
+								<Col span={11} className='est-login-form-text-container'>
 									<h4 className='est-login-form-text'>Name</h4>
 									<Input
 										className={'est-auth-login-field-input'}
@@ -143,7 +142,7 @@ export default function ModalLoginUser(props) {
 										disabled={false}
 									/>
 								</Col>
-								<Col span={12} className='est-login-form-text-container'>
+								<Col span={11} className='est-login-form-text-container'>
 									<h4 className='est-login-form-text'>Last</h4>
 									<Input
 										className={'est-auth-login-field-input'}

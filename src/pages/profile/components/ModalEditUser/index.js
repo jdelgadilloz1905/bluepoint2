@@ -143,6 +143,20 @@ export default function ModalLoginUser(props) {
 								/>
 							</Col>
 
+							<Col span={12} className='est-login-form-text-container'>
+								<h4 className='est-login-form-text'>Last</h4>
+								<Input
+									className={'est-auth-login-field-input'}
+									inputName={'updLast'}
+									inputNameLabel={'Last'}
+									inputNameRule={true}
+									inputNameMessage={'Name ir required.'}
+									inputNameType={'text'}
+									inputNameIcon={''}
+									inputNameRules={'rulesLastNameEN'}
+								/>
+							</Col>
+
 							<Col span={24} className='est-login-form-text-container'>
 								<h4 className='est-login-form-text'>E-mail</h4>
 								<Input

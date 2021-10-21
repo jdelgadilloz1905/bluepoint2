@@ -7,6 +7,10 @@ import { setGlobal } from 'reactn'
 import { Row, Col, Button, Modal, Form, Select } from 'antd'
 
 import Input from '../../../../../../components/Inputs/Normal'
+import InputMask from '../../../../../../components/Inputs/InputMask'
+
+import { rulesValidation } from '../../../../../../components/Inputs/Normal/rules'
+import { rulesValidationMask } from '../../../../../../components/Inputs/InputMask/rules'
 
 import { GetAllUsers } from '../../services'
 
@@ -102,6 +106,57 @@ const CreateUser = () => {
 									inputNameIcon={''}
 									inputNameRules={'rulesEmailEN'}
 									disabled={false}
+								/>
+							</Col>
+							<Col span={24} className='est-login-form-text-container'>
+								<h4 className='est-login-form-text'>Phone</h4>
+								<Form.Item
+									name={'regPhone'}
+									rules={rulesValidationMask['rulesPhoneEN']}>
+									<InputMask
+										maskstyle={'est-auth-login-field-input'}
+										mask='+(1) 999 999 9999'
+										placeholder='+(1) 999 999 9999'
+									/>
+								</Form.Item>
+							</Col>
+
+							<Col span={24} className='est-login-form-text-container'>
+								<h4 className='est-login-form-text'>User profile</h4>
+								<div className='est-create-user-modal-selector'>
+									<Form.Item
+										name={'regPerfil'}
+										rules={rulesValidation.rulesRequiredES}>
+										<Select>
+											<Option value='0'>Regular user</Option>
+											<Option value='1'>Manager</Option>
+										</Select>
+									</Form.Item>
+								</div>
+							</Col>
+							<Col span={24} className='est-login-form-text-container'>
+								<h4 className='est-login-form-text'>Password</h4>
+								<Input
+									className={'ph-auth-register-field-input'}
+									inputName={'regPassword'}
+									inputNameLabel={'Password'}
+									inputNameRule={true}
+									inputNameMessage={'Enter your password.'}
+									inputNameType={'password'}
+									inputNameIcon={''}
+									inputNameRules={'rulesPasswordEN'}
+								/>
+								<Input
+									className={'ph-auth-register-field-input'}
+									inputName={'confirm'}
+									inputNameLabel={'Confirm password'}
+									inputNameRule={true}
+									inputNameMessage={'Enter your password.'}
+									inputNameType={'password'}
+									inputNameIcon={''}
+									dependencies={['password']}
+									hasFeedback
+									inputNameRules={'confirmPasswordEN'}
 								/>
 							</Col>
 						</Row>

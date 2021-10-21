@@ -21,7 +21,6 @@ const Generalusers = () => {
 
 	useEffect(() => {
 		GetUserInfo(isUser.id).then((response) => {
-			console.log('mis datos ', response)
 			if (response) {
 				setGlobal({
 					DataProfile: response,
