@@ -66,7 +66,7 @@ const CreateInsu = () => {
 				<Form form={form} name='user_create' onFinish={handleCreateInsu}>
 					<div className='est-auth-login-form-container'>
 						<Row>
-							<Col span={12} className='est-login-form-text-container'>
+							<Col span={24} className='est-login-form-text-container'>
 								<h4 className='est-login-form-text'>Name</h4>
 								<Input
 									className={'est-auth-login-field-input'}

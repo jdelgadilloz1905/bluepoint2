@@ -78,7 +78,7 @@ const InsuranceInfo = () => {
 	const handleSearchList = (item) => {
 		const filter = item.target.value
 		let filterList = isFilterList.filter((data) => {
-			data.name = data.email.toLowerCase()
+			data.name = data.name.toLowerCase()
 			return data.name.indexOf(filter) !== -1
 		})
 		setAllInsu(filterList)
@@ -167,7 +167,7 @@ const InsuranceInfo = () => {
 						lg={12}
 						xl={12}
 						className='est-general-list-create-user-container'>
-						{/* <ModalCreateUser /> */}
+						<ModalCreateInsu />
 					</Col>
 				</Row>
 
