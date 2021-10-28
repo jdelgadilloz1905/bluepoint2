@@ -1,0 +1,474 @@
+/** @format */
+
+.est-general-list-users-banner-container {
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+.est-general-list-users-responsive-button {
+	background-color: #296120 !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	margin: 5px 26px 0 !important;
+}
+
+.est-general-list-users-responsive-button:hover {
+	background-color: #467e19 !important;
+	border-color: #b1d084 !important;
+}
+
+.est-general-list-users-banner-search-container {
+	margin-top: 5px;
+	display: flex;
+	justify-content: center;
+}
+
+.est-general-list-users-banner-search-container .ant-form-item {
+	margin-bottom: 0;
+	padding-left: 10px;
+}
+
+.est-general-list-users-banner-search {
+	border-radius: 5px !important;
+	padding: 3px 10px !important;
+	font-size: 15px !important;
+}
+
+.est-general-list-users-banner-search:hover,
+.est-general-list-users-banner-search:focus {
+	border-color: #42b71e !important;
+	border-right-width: 0;
+}
+
+.est-general-list-users-list-main-title-container {
+	text-align: center;
+	padding: 5px 10px 5px 10px;
+}
+
+.est-general-list-users-list-main-title {
+	margin-bottom: 0;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.est-general-list-users-list-main-title-responsive {
+	margin-bottom: 0;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.est-general-list-users-list-main-container {
+	text-align: center;
+	overflow: auto;
+	height: 100%;
+	max-height: 550px;
+	margin-bottom: 5px;
+}
+
+.est-general-list-users-list-container {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	margin: 5px;
+	padding: 10px;
+	cursor: pointer;
+	align-items: center;
+}
+.est-general-list-users-title {
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 100;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 100%;
+}
+
+.est-users-manage-list-button-container {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.est-users-manage-list-button {
+	background-color: #296120 !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	color: white !important;
+	font-size: 13px !important;
+	height: 32px !important;
+	padding: 14px 10px !important;
+	display: flex !important;
+	align-items: center !important;
+}
+
+.est-users-manage-list-button:hover,
+.est-users-manage-list-button:focus,
+.est-users-manage-list-button:active {
+	background-color: #467e19 !important;
+	border-color: #b1d084 !important;
+}
+
+.est-auth-edit-general-profile-button {
+	background-color: #296120 !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	color: white !important;
+	font-size: 13px !important;
+	height: 32px !important;
+	margin-left: 5px;
+	padding: 5px 7px !important;
+	display: flex !important;
+	align-items: center !important;
+}
+
+.est-auth-edit-general-profile-button:hover,
+.est-auth-edit-general-profile-button:active,
+.est-auth-edit-general-profile-button:focus {
+	background-color: #467e19 !important;
+	border-color: #b1d084 !important;
+}
+
+.est-users-manage-list-button-disable-user-button {
+	background-color: #296120 !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	color: white !important;
+	font-size: 13px !important;
+	height: 32px !important;
+	margin-left: 5px;
+	padding: 5px 7px !important;
+	display: flex !important;
+	align-items: center !important;
+}
+
+.est-users-manage-list-button-disable-user-button:hover,
+.est-users-manage-list-button-disable-user-button:active,
+.est-users-manage-list-button-disable-user-button:focus {
+	background-color: #467e19 !important;
+	border-color: #b1d084 !important;
+}
+
+.est-manage-users-modal-global-container .ant-modal {
+	padding-bottom: 0;
+	width: 700px !important;
+}
+
+.est-manage-users-modal-global-container .ant-modal-header {
+	border-radius: 10px 10px 0 0;
+	border-bottom: 0;
+	padding: 15px 20px;
+}
+
+.est-manage-users-modal-global-container .ant-modal-header .ant-modal-title {
+	color: #336722 !important;
+	font-weight: 600;
+}
+
+.est-manage-users-modal-global-container .ant-modal-close:hover {
+	color: #336722;
+}
+
+.est-manage-users-modal-global-container .ant-modal-body {
+	padding: 5px 20px 15px;
+	text-align: center;
+}
+
+.est-manage-users-modal-main-container {
+	padding: 0 20px;
+}
+
+.est-manage-users-modal-profile-image-container {
+	overflow: hidden;
+	width: 100%;
+	max-width: 150px;
+	min-height: 150px;
+	max-height: 150px;
+	margin: 5px auto 15px;
+	border-radius: 100%;
+	position: relative;
+	border: 1px solid #eee;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.est-manage-users-modal-profile-image {
+	width: 100%;
+}
+
+.est-manage-users-modal-title-container {
+	text-align: left;
+}
+
+.est-manage-users-modal-direct-title-container {
+	text-align: center;
+}
+
+.est-manage-users-modal-title {
+	font-size: 15px;
+	font-weight: 400;
+	margin-bottom: 0;
+	padding-bottom: 2px;
+}
+
+.est-manage-users-modal-title-span {
+	font-weight: 500;
+}
+
+.est-manage-users-modal-password-global-container {
+	padding: 0 20px;
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+}
+
+.est-manage-users-modal-password-main-container {
+	width: 100%;
+}
+
+.est-manage-users-modal-password-title {
+	font-size: 15px;
+	margin-bottom: 0;
+	padding-bottom: 10px;
+	font-weight: 500;
+}
+
+.est-manage-users-modal-spacer-container {
+	width: 100%;
+}
+
+.est-manage-users-modal-spacer {
+	margin: 0;
+	border: 1px solid #ddd;
+	margin: 7px 0;
+}
+
+.est-manage-users-modal-password-input {
+	padding: 4px 10px !important;
+	font-size: 14px !important;
+	border-radius: 5px !important;
+}
+
+.est-manage-users-modal-password-input:hover,
+.est-manage-users-modal-password-input:focus {
+	border-color: #42b71e !important;
+}
+
+.est-manage-users-modal-password-button {
+	background-color: #296120 !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	padding: 17px 25px !important;
+	align-items: center !important;
+	justify-content: center !important;
+	display: flex !important;
+	margin: auto;
+	color: white !important;
+}
+
+.est-manage-users-modal-password-button:hover,
+.est-manage-users-modal-password-button:focus,
+.est-manage-users-modal-password-button:active {
+	background-color: #467e19 !important;
+	border-color: #b1d084 !important;
+}
+
+.est-manage-users-modal-button-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 25px;
+}
+
+.est-manage-users-modal-button {
+	background-color: #296120 !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	padding: 17px 25px !important;
+	align-items: center !important;
+	justify-content: center !important;
+	display: flex !important;
+	margin: auto;
+	color: white !important;
+}
+
+.est-manage-users-modal-button:hover,
+.est-manage-users-modal-button:active,
+.est-manage-users-modal-button:focus {
+	background-color: #467e19 !important;
+	border-color: #b1d084 !important;
+}
+
+.est-general-list-users-title-state-active {
+	height: 15px;
+	width: 15px;
+	border: 1px solid #ddd;
+	border-radius: 100%;
+	background-color: greenyellow;
+	margin: auto;
+	display: block;
+}
+
+.est-general-list-users-title-state-disable {
+	height: 15px;
+	width: 15px;
+	border: 1px solid #ddd;
+	border-radius: 100%;
+	background-color: red;
+	margin: auto;
+	display: block;
+}
+
+.est-general-list-create-user-container {
+	display: flex !important;
+	justify-content: flex-end !important;
+	padding-right: 20px;
+}
+
+@media (max-width: 992px) {
+	.est-general-list-users-banner-search-container .ant-form-item {
+		padding-left: 0px;
+	}
+}
+
+@media (max-width: 940px) {
+	.est-users-manage-list-button {
+		padding: 14px 5px !important;
+	}
+}
+
+@media (min-width: 893px) {
+	.est-general-list-users-responsive-button {
+		display: none !important;
+	}
+
+	.est-general-list-users-banner-search-container {
+		padding-left: 25px;
+	}
+}
+
+@media (max-width: 892px) {
+	.est-general-list-users-list-main-title-container {
+		padding: 5px 20px 8px;
+	}
+
+	.est-general-list-users-list-main-title-responsive {
+		margin-right: 5px;
+	}
+
+	.est-general-list-users-list-main-container {
+		margin: 0 20px 5px;
+	}
+
+	.est-general-list-users-title-state-active {
+		margin: 1px;
+		display: block;
+	}
+
+	.est-general-list-users-title-state-disable {
+		margin: 1px;
+		display: block;
+	}
+}
+
+@media (max-width: 767px) {
+	.est-general-list-users-list-main-title-container {
+		display: none !important;
+	}
+
+	.est-general-list-users-list-main-container {
+		margin: 10px 20px 5px;
+	}
+
+	.est-users-manage-list-button-container {
+		width: 100%;
+		max-width: 150px;
+		justify-content: center;
+	}
+
+	.est-users-manage-list-button {
+		font-size: 12px !important;
+		height: 25px !important;
+		padding: 0px 10px !important;
+	}
+
+	.est-auth-edit-general-profile-button {
+		font-size: 13px !important;
+		height: 25px !important;
+		padding: 0px 10px !important;
+	}
+
+	.est-users-manage-list-button-disable-user-button {
+		height: 26px !important;
+		padding: 0px 8px !important;
+	}
+
+	.est-users-manage-list-button-disable-user-button span {
+		font-size: 14px !important;
+	}
+
+	.est-manage-users-modal-main-container {
+		padding: 0 20px 20px;
+	}
+
+	.est-manage-users-modal-title-container {
+		text-align: center;
+	}
+
+	.est-manage-users-modal-password-global-container {
+		padding: 20px 20px 15px;
+	}
+
+	.est-manage-users-modal-password-main-container {
+		width: 50%;
+	}
+
+	.est-manage-users-modal-password-main-container .ant-form-item {
+		margin-bottom: 20px;
+	}
+
+	.est-manage-users-modal-password-button {
+		padding: 17px 15px !important;
+	}
+}
+
+@media (max-width: 768px) {
+	.est-general-list-users-list-text-container {
+		text-align: left;
+	}
+
+	.est-general-list-users-title {
+		display: flex;
+	}
+}
+
+@media (min-width: 768px) {
+	.est-general-list-users-list-main-title-responsive {
+		display: none;
+	}
+
+	.est-manage-users-modal-spacer-container {
+		display: none;
+	}
+}
+
+@media (max-width: 701px) {
+	.est-general-list-users-banner-container {
+		padding-right: 20px;
+	}
+}
+
+@media (max-width: 576px) {
+	.est-general-list-users-banner-container {
+		display: none !important;
+	}
+
+	.est-general-list-users-banner-search-container {
+		padding: 0 25px;
+		margin-top: 10px;
+	}
+
+	.est-general-list-users-banner-search {
+		font-size: 14px !important;
+	}
+}

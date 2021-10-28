@@ -6,13 +6,13 @@ import notification from 'antd/lib/notification'
 
 import { ENV_CORE } from '../../../../../../components/Enviroment'
 
-export default async function CreateUserService(item) {
+export default async function CreateInsuService(item) {
 	console.log('datos a enviar ', item)
 
 	let returnResponse
 	await axios({
 		method: 'POST',
-		url: `${ENV_CORE}/api/auth/user-register`,
+		url: `${ENV_CORE}/api/insurance/insu-register`,
 		data: item,
 	})
 		.then((response) => {
@@ -25,7 +25,7 @@ export default async function CreateUserService(item) {
 			} else {
 				notification['warning']({
 					message: `Warning`,
-					description: `Error creating user or there is already a user registered with that email`,
+					description: `Error creating user or there is already a user registered with that name`,
 				})
 			}
 		})

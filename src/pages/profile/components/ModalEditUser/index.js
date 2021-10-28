@@ -44,7 +44,7 @@ export default function ModalLoginUser(props) {
 		item.updPhone = item.updPhone.replace(/[+()/\s/]/g, '')
 		item.updPerfil = props.isUser.profile
 		setGlobal({ LoadingButtonProfile: true })
-		if (!props.isUser.foto) {
+		if (!props.isUser.Photo) {
 			if (!isNewPhoto) {
 				setGlobal({ LoadingButtonProfile: false })
 				notification['warning']({
@@ -53,13 +53,13 @@ export default function ModalLoginUser(props) {
 				})
 				return
 			} else {
-				item.updFoto = isNewPhoto
+				item.updPhoto = isNewPhoto
 			}
 		} else {
 			if (isNewPhoto) {
-				item.updFoto = isNewPhoto
+				item.updPhoto = isNewPhoto
 			} else {
-				item.updFoto = props.isUser.photo
+				item.updPhoto = props.isUser.photo
 			}
 		}
 

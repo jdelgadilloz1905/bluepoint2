@@ -13,7 +13,7 @@ import message from 'antd/lib/message'
 
 import { UserAddOutlined } from '@ant-design/icons'
 
-import { ENV_CORE } from '../../../../../../../../components/Enviroment'
+import { ENV_UPLOAD_IMAGE } from '../../../../../../../../components/Enviroment'
 
 import './style.css'
 
@@ -49,7 +49,7 @@ export default function UploadImageProfile(props) {
 		}
 		try {
 			const response = await axios.post(
-				`${ENV_CORE}/api/upload/upload-image`,
+				`${ENV_UPLOAD_IMAGE}/api/products/upload-image`,
 				data,
 				config
 			)

@@ -6,26 +6,24 @@ import notification from 'antd/lib/notification'
 
 import { ENV_CORE } from '../../../../../../components/Enviroment'
 
-export default async function CreateUserService(item) {
-	console.log('datos a enviar ', item)
-
+export default async function ProfileUpdate(item) {
 	let returnResponse
 	await axios({
 		method: 'POST',
-		url: `${ENV_CORE}/api/auth/user-register`,
+		url: `${ENV_CORE}/api/auth/update-user`,
 		data: item,
 	})
 		.then((response) => {
 			if (response.data.statusCode === 200) {
 				notification['success']({
-					message: `Congratulations`,
-					description: `User created successfully`,
+					message: `Congratulations!`,
+					description: `Data updated correctly`,
 				})
 				returnResponse = response
 			} else {
 				notification['warning']({
 					message: `Warning`,
-					description: `Error creating user or there is already a user registered with that email`,
+					description: `Error updating your profile data.`,
 				})
 			}
 		})

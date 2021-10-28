@@ -24,11 +24,10 @@ export default function ProfileInfo(props) {
 
 	const handleUpdatePassWord = async (item) => {
 		setLoading(true)
-
-		console.log('datos del props ', props.isUserProfileInfo)
+		console.log('aqui paso los datos ')
 		const updatePassword = {
-			updEmailEncriptado: props.isUserProfileInfo.id,
-			updNewPassword: item.regPassword,
+			idUser: props.isUserProfileInfo.id,
+			newPassword: item.regPassword,
 		}
 
 		await UpdatePassword(updatePassword).then(() => {})
