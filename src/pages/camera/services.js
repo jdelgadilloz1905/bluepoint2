@@ -15,7 +15,8 @@ const servicesCamera = {
 		})
 			.then((response) => {
 				if (response.data.statusCode === 200) {
-					returnResponse = response.data.insuInfo
+					console.log('respuesta ', response.data.insuranceInfo)
+					returnResponse = response.data.insuranceInfo
 				} else {
 					notification['warning']({
 						message: `Error`,
@@ -29,6 +30,7 @@ const servicesCamera = {
 					description: `Check your internet connection`,
 				})
 			})
+		console.log('muestro la info de los seguros ', returnResponse)
 		return returnResponse
 	},
 	async getDatosPatient(item) {

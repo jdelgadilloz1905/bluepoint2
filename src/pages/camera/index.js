@@ -272,7 +272,7 @@ export default function App(props) {
 						</Modal>
 					</div>
 				</Card>
-				{isTexto !== '' ? `${isTexto}` : 'Extracted text'}
+				{isTexto !== '' ? `Insurance code :${isTexto}` : 'Extracted text'}
 			</div>
 		</>
 	)
