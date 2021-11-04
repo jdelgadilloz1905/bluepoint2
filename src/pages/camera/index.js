@@ -176,6 +176,7 @@ export default function App(props) {
 					=============================================*/
 
 				console.log('resultado ', array)
+				setTexto(array)
 				/*for (let x = 1; x < array.length; x++) {
 					console.warn('resultado arriba ', array[x])
 					if (array[x].description.includes('-')) {
