@@ -175,15 +175,15 @@ export default function App(props) {
 					LA POSICION EXACTA PARA EXTRAER EL ID
 					=============================================*/
 
-				console.log('resultado ', array)
-				setTexto(array)
-				/*for (let x = 1; x < array.length; x++) {
-					console.warn('resultado arriba ', array[x])
-					if (array[x].description.includes('-')) {
-						setTexto(array[x].description)
-						console.info('aqui pasa todo ')
-					}
-				}*/
+				console.log('texto total ', array[0].description)
+				setTexto(array[0].description)
+				// for (let x = 1; x < array.length; x++) {
+				// 	console.warn('resultado arriba ', array[x])
+				// 	if (array[x].description.includes('-')) {
+				// 		setTexto(array[x].description)
+				// 		console.info('aqui pasa todo ')
+				// 	}
+				// }
 			})
 
 			setLoadingButtonProfile(false)
