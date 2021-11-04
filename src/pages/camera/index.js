@@ -169,16 +169,13 @@ export default function App(props) {
 				},
 			}).then((r) => {
 				const array = r.data.responses[0].textAnnotations
-
+				//console.log('array ', r.data.responses[0].textAnnotations)
 				/*=============================================
 					DEPENDIENDO DE LA SELECCION DEL SEGURO BUSCA
 					LA POSICION EXACTA PARA EXTRAER EL ID
 					=============================================*/
 
-				console.log('seguros ', isInsurance)
-				//console.log('la posicion para extraer es ', filterList)
-				console.log('posicion es ', isPosition)
-				setTexto(array[isPosition].description)
+				console.log('resultado ', array)
 				/*for (let x = 1; x < array.length; x++) {
 					console.warn('resultado arriba ', array[x])
 					if (array[x].description.includes('-')) {
@@ -219,7 +216,7 @@ export default function App(props) {
 
 				<Card bordered={false} style={{ width: 300 }}>
 					{loadingSpin()}
-					{isInsurance && (
+					{/* {isInsurance && (
 						<Form>
 							<h4 className='est-login-form-text'>Select insurance</h4>
 							<div className='est-create-user-modal-selector'>
@@ -234,7 +231,7 @@ export default function App(props) {
 								</Form.Item>
 							</div>
 						</Form>
-					)}
+					)} */}
 					<div className='est-upload-image-camera-container'>
 						<Upload
 							accept='image/*'
