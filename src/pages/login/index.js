@@ -19,7 +19,8 @@ export default function LoginUser() {
 	const handleLoginUser = async (item) => {
 		setLoading(true)
 		await servicesLogin.Login(item).then((response) => {
-			if (response) {
+			if (response.email) {
+				window.location.href = '/profile'
 				setLoading(false)
 			}
 		})
