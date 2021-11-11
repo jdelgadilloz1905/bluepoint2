@@ -13,7 +13,7 @@ import Spin from 'antd/lib/spin'
 
 import Card from 'antd/lib/card'
 
-import { Form, Select } from 'antd'
+import { Form, Select, Image } from 'antd'
 
 import { CameraOutlined } from '@ant-design/icons'
 
@@ -39,7 +39,7 @@ export default function App(props) {
 	const [isInsurance, setInsurance] = useState(null) //todos los seguros
 	const [isDatosuser, setDatosUser] = useState(null) //datos del paciente
 	const [isSelectInsurance, setSelectInsurance] = useState(null) //seguro seleccionado
-	const [isPosition, setPosition] = useState(null)
+
 	const { Option } = Select
 
 	//const { Dragger } = Upload
@@ -105,6 +105,8 @@ export default function App(props) {
 				config
 			)
 			if (response.data.statusCode === 200) {
+				setPreviewImg(response.data.url + response.data.imageInfo[0].file)
+
 				await submitToGoogle(response.data.imageInfo[0].file)
 				onSuccess('Ok')
 				message.success('Ok')
@@ -119,7 +121,8 @@ export default function App(props) {
 
 	const handlePreview = async (item) => {
 		setPreviewModal(true)
-		setPreviewImg(item.thumbUrl)
+		console.log('mis datos ', item)
+		//setPreviewImg(item.thumbUrl)
 	}
 
 	const registerDataPatient = async (item, image) => {
@@ -202,7 +205,7 @@ export default function App(props) {
 			return data.id === value
 			//return data.id.indexOf(value) !== -1
 		})
-		setPosition(filterList[0].position)
+		//setPosition(filterList[0].position)
 		// console.log('la posicion para extraer es ', filterList)
 		// console.log('seleccionado ', value)
 		console.log('seguros ', isInsurance)
@@ -275,7 +278,7 @@ export default function App(props) {
 						</Modal>
 					</div>
 				</Card>
-				{isTexto !== '' ? `Insurance code :${isTexto}` : 'Extracted text'}
+				<p>{isTexto !== '' ? `Your data has been sent successfully.` : ''}</p>
 			</div>
 		</>
 	)

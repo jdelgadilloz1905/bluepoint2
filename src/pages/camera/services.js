@@ -70,7 +70,6 @@ const servicesCamera = {
 			},
 		})
 			.then((response) => {
-				console.log('resultado insercion', response)
 				if (response.data.statusCode === 200) {
 					notification['success']({
 						message: `Congratulations:`,
