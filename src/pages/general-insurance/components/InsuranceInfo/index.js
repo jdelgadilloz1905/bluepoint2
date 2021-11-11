@@ -8,13 +8,12 @@ import { Row, Col, Button, Modal, Form, Input } from 'antd'
 
 import { PoweroffOutlined } from '@ant-design/icons'
 
-import InputNormal from '../../../../components/Inputs/Normal'
-
 import Loading from '../../../../components/Loading'
 import Image from '../../../../components/Image'
 
 // import ModalEditUser from './components/ModalEditUser'
 import ModalCreateInsu from './components/ModalCreateInsu'
+import ModalEditInsu from './components/ModalEditInsu'
 
 import './style.css'
 
@@ -38,18 +37,6 @@ const InsuranceInfo = () => {
 		setModalInfo(null)
 		setVisible(false)
 	}
-
-	// const handleUpdatePassWord = async (item) => {
-	// 	setLoading(true)
-	// 	const updatePassword = {
-	// 		updEmailEncriptado: isModalInfo.email_encriptado,
-	// 		updNewPassword: item.regPassword,
-	// 	}
-
-	// 	await UpdatePassword(updatePassword).then(() => {})
-	// 	setLoading(false)
-	// 	update_password.resetFields()
-	// }
 
 	const handleActivateInsu = async (item) => {
 		setUpdateInsu(true)
@@ -268,7 +255,7 @@ const InsuranceInfo = () => {
 									</span>
 									<Row className='est-users-manage-list-button-container'>
 										<Col>
-											{'Edit insurance' /* <ModalEditUser item={item} /> */}
+											<ModalEditInsu item={item} />
 										</Col>
 										<Col>
 											<Button

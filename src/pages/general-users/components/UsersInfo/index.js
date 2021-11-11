@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 
 import { setGlobal, useGlobal } from 'reactn'
 
-import { Row, Col, Button, Modal, Form, Input } from 'antd'
+import { Row, Col, Button, Modal, Form, Input, Divider, Comment } from 'antd'
 
 import { PoweroffOutlined } from '@ant-design/icons'
 
@@ -15,10 +15,16 @@ import Image from '../../../../components/Image'
 
 import ModalEditUser from './components/ModalEditUser'
 import ModalCreateUser from './components/ModalCreateUser'
+import ModalEditInsurance from './components/ModalEditInsurance'
 
 import './style.css'
 
-import { GetAllUsers, ActivateUser, UpdatePassword } from './services'
+import {
+	GetAllUsers,
+	ActivateUser,
+	UpdatePassword,
+	SearchInsuranceDetail,
+} from './services'
 
 const Usersinfo = () => {
 	const [isMobile, setMobile] = useState(false)
@@ -29,14 +35,25 @@ const Usersinfo = () => {
 	const [isUpdateUser, setUpdateUser] = useState(false)
 	const [isLoading, setLoading] = useState(false)
 	const [isFilterList, setFilterList] = useState(null)
+	const [isInsuDetail, setInsuDetail] = useState(null)
 
 	const [isGetAllUsers] = useState({
 		service_global_description: 'Check your internet connection',
 	})
 
 	const handleManageUser = (item) => {
+		//buscar los datos del seguro :)
+		//findInsuranceUser(item)
 		setVisible(true)
 		setModalInfo(item)
+	}
+
+	const findInsuranceUser = (item) => {
+		SearchInsuranceDetail(item).then((response) => {
+			if (response) {
+				setInsuDetail(response)
+			}
+		})
 	}
 
 	const handleCloseManageUser = () => {
@@ -83,9 +100,11 @@ const Usersinfo = () => {
 	const handleSearchList = (item) => {
 		const filter = item.target.value
 		let filterList = isFilterList.filter((data) => {
-			data.email = data.email.toLowerCase()
-			return data.email.indexOf(filter) !== -1
+			data.info_card = data.info_card.toLowerCase()
+
+			return data.info_card.indexOf(filter) !== -1
 		})
+
 		setAllUsers(filterList)
 	}
 
@@ -297,6 +316,9 @@ const Usersinfo = () => {
 											<ModalEditUser item={item} />
 										</Col>
 										<Col>
+											<ModalEditInsurance item={item} />
+										</Col>
+										<Col>
 											<Button
 												loading={isUpdateUser}
 												icon={<PoweroffOutlined />}
@@ -444,6 +466,51 @@ const Usersinfo = () => {
 									</div>
 								</Col>
 							)}
+							<Divider>Insurance Detail</Divider>
+							<Col
+								xs={24}
+								sm={24}
+								md={isModalInfo.modo === 'directo' ? 12 : 24}
+								lg={isModalInfo.modo === 'directo' ? 12 : 24}
+								xl={isModalInfo.modo === 'directo' ? 12 : 24}
+								className='est-manage-users-modal-main-container'>
+								<div
+									className={`${
+										isModalInfo.modo !== 'directo'
+											? 'est-manage-users-modal-direct-title-container'
+											: ''
+									} est-manage-users-modal-title-container`}>
+									<h4 className='est-manage-users-modal-title'>
+										<span className='est-manage-users-modal-title-span'>
+											Insurance:
+										</span>{' '}
+										{isModalInfo.name_insurance === 'null'
+											? isModalInfo.name_insurance
+											: 'does not have insurance assigned'}
+									</h4>
+
+									<h4 className='est-manage-users-modal-title'>
+										<span className='est-manage-users-modal-title-span'>
+											ID insurance:
+										</span>{' '}
+										{isModalInfo.id_register}
+									</h4>
+
+									<h4 className='est-manage-users-modal-title'>
+										<span className='est-manage-users-modal-title-span'>
+											URL:
+										</span>{' '}
+										{isModalInfo.url}
+									</h4>
+
+									<h4 className='est-manage-users-modal-title'>
+										<span className='est-manage-users-modal-title-span'>
+											Card information:
+										</span>{' '}
+										<Comment content={<p>{isModalInfo.info_card}</p>} />
+									</h4>
+								</div>
+							</Col>
 						</Row>
 					)}
 					<div className='est-manage-users-modal-button-container'>

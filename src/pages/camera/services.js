@@ -57,6 +57,40 @@ const servicesCamera = {
 			})
 		return returnResponse
 	},
+
+	async registerDatosPatient(item, isDatosuser, image) {
+		let returnResponse
+		await axios({
+			method: 'POST',
+			url: `${ENV_CORE}/api/patient/register-data`,
+			data: {
+				item: item,
+				datosUser: isDatosuser,
+				image: image,
+			},
+		})
+			.then((response) => {
+				console.log('resultado insercion', response)
+				if (response.data.statusCode === 200) {
+					notification['success']({
+						message: `Congratulations:`,
+						description: `Your information has been sent successfully!`,
+					})
+				} else {
+					notification['warning']({
+						message: `Error`,
+						description: `No records found`,
+					})
+				}
+			})
+			.catch(() => {
+				notification['error']({
+					message: `Error`,
+					description: `Check your internet connection`,
+				})
+			})
+		return returnResponse
+	},
 }
 
 export default servicesCamera

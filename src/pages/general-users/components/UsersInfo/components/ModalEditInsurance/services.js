@@ -6,11 +6,11 @@ import notification from 'antd/lib/notification'
 
 import { ENV_CORE } from '../../../../../../components/Enviroment'
 
-export default async function InsuranceUpdate(item) {
+export default async function ProfileUpdateInsurance(item) {
 	let returnResponse
 	await axios({
 		method: 'POST',
-		url: `${ENV_CORE}/api/insurance/update-insurance`,
+		url: `${ENV_CORE}/api/patient/update-insurance`,
 		data: item,
 	})
 		.then((response) => {
@@ -23,7 +23,7 @@ export default async function InsuranceUpdate(item) {
 			} else {
 				notification['warning']({
 					message: `Warning`,
-					description: `Error updating your profile data.`,
+					description: `Failed to update insurance data`,
 				})
 			}
 		})

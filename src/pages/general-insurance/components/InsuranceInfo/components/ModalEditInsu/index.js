@@ -8,84 +8,48 @@ import { Modal, Form, Button, notification, Row, Col } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 
 import Input from '../../../../../../components/Inputs/Normal'
-import Image from '../../../../../../components/Image'
-import InputMask from '../../../../../../components/Inputs/InputMask'
 
 import { ENV_CORE } from '../../../../../../components/Enviroment'
 
-import { rulesValidationMask } from '../../../../../../components/Inputs/InputMask/rules'
+import { GetAllInsurance } from '../../services'
 
-import Uploadphoto from './components/UploadPhoto'
-
-import { GetAllUsers } from '../../services'
-
-import ProfileUpdate from './services'
+import InsuranceUpdate from './services'
 
 import './style.css'
 
 export default function ModalLoginUser(props) {
 	const [form] = Form.useForm()
-	// const { Option } = Select
-	const [isModalUser, setModalUser] = useState(false)
-	const [isNewPhoto, setNewPhoto] = useState(null)
+	const [isModalInsu, setModalInsu] = useState(false)
 	const [isLoading] = useGlobal('LoadingButtonProfile')
 
-	const handleModalEditUser = () => {
-		if (isModalUser) {
-			setModalUser(false)
+	const handleModalEditInsu = () => {
+		if (isModalInsu) {
+			setModalInsu(false)
 		} else {
-			setModalUser(true)
+			setModalInsu(true)
 		}
 	}
 
-	const handleEditUser = async (item) => {
-		item.updPhone = item.updPhone.replace(/[+()/\s/]/g, '')
+	const handleEditInsu = async (item) => {
 		setGlobal({ LoadingButtonProfile: true })
-		if (!props.item.photo) {
-			if (!isNewPhoto) {
-				setGlobal({ LoadingButtonProfile: false })
-				notification['warning']({
-					message: 'Warning',
-					description: 'You must upload an image for the profile.',
-				})
-				return
-			} else {
-				item.updPhoto = isNewPhoto
-			}
-		} else {
-			if (isNewPhoto) {
-				item.updPhoto = isNewPhoto
-			} else {
-				item.updPhoto = props.item.photo
-			}
-		}
 
-		await ProfileUpdate(item).then((response) => {
+		await InsuranceUpdate(item).then((response) => {
 			if (response) {
-				GetAllUsers().then((responseUsers) => {
+				GetAllInsurance().then((responseInsurance) => {
 					setGlobal({
-						allUsers: responseUsers,
+						allInsu: responseInsurance,
 					})
 				})
 			}
 		})
 		setGlobal({ LoadingButtonProfile: false })
-		setModalUser(false)
+		setModalInsu(false)
 	}
-
-	const handleAddProfileImage = (item) => {
-		setNewPhoto(`${ENV_CORE}/${item.file}`)
-	}
-
-	const handleDeleteProfileImage = (item) => {
-		setNewPhoto(null)
-	}
-
 	return (
 		<>
 			<Button
 				className='est-auth-edit-general-profile-button'
-				onClick={() => handleModalEditUser()}>
+				onClick={() => handleModalEditInsu()}>
 				<EditOutlined />
 			</Button>
 			<Modal
@@ -94,27 +58,26 @@ export default function ModalLoginUser(props) {
 				maskClosable={true}
 				width='700px'
 				centered
-				visible={isModalUser}
-				onCancel={() => handleModalEditUser()}
+				visible={isModalInsu}
+				onCancel={() => handleModalEditInsu()}
 				okText='Confirmar'
 				cancelButtonProps={{ style: { display: 'none' } }}
 				okButtonProps={{ style: { display: 'none' } }}>
-				<h3 className='est-auth-edit-profile-modal-title'>Edit patient data</h3>
+				<h3 className='est-auth-edit-profile-modal-title'>
+					Edit Insurance data
+				</h3>
 				{props.item && (
 					<Form
 						form={form}
 						initialValues={{
-							updName: props.item.name,
-							updLast: props.item.last,
-							updEmail: props.item.email,
 							updId: props.item.id,
-							updPhone: props.item.phone,
+							updName: props.item.name,
 						}}
 						name='user_edit'
-						onFinish={handleEditUser}>
+						onFinish={handleEditInsu}>
 						<div className='est-auth-login-form-container'>
 							<Row>
-								<Col span={2} className='est-login-form-text-container'>
+								<Col span={5} className='est-login-form-text-container'>
 									<h4 className='est-login-form-text'>ID</h4>
 									<Input
 										className={'est-auth-login-field-input'}
@@ -128,84 +91,19 @@ export default function ModalLoginUser(props) {
 										disabled={true}
 									/>
 								</Col>
-								<Col span={11} className='est-login-form-text-container'>
+								<Col span={19} className='est-login-form-text-container'>
 									<h4 className='est-login-form-text'>Name</h4>
 									<Input
 										className={'est-auth-login-field-input'}
 										inputName={'updName'}
 										inputNameLabel={'Name'}
 										inputNameRule={true}
-										inputNameMessage={'Name ir required.'}
+										inputNameMessage={'Name is required.'}
 										inputNameType={'text'}
 										inputNameIcon={''}
-										inputNameRules={'rulesFirstNameEN'}
+										inputNameRules={'rulesName'}
 										disabled={false}
 									/>
-								</Col>
-								<Col span={11} className='est-login-form-text-container'>
-									<h4 className='est-login-form-text'>Last</h4>
-									<Input
-										className={'est-auth-login-field-input'}
-										inputName={'updLast'}
-										inputNameLabel={'Last'}
-										inputNameRule={true}
-										inputNameMessage={'Last is required.'}
-										inputNameType={'text'}
-										inputNameIcon={''}
-										inputNameRules={'rulesLastNameEN'}
-									/>
-								</Col>
-								<Col span={24} className='est-login-form-text-container'>
-									<h4 className='est-login-form-text'>Email</h4>
-									<Input
-										className={'est-auth-login-field-input'}
-										inputName={'updEmail'}
-										inputNameLabel={'Email'}
-										inputNameRule={true}
-										inputNameMessage={'E-mail is required'}
-										inputNameType={'text'}
-										inputNameIcon={''}
-										inputNameRules={'rulesEmailEN'}
-										disabled={props.item.modo === 'directo' ? false : true}
-									/>
-								</Col>
-								<Col span={24} className='est-login-form-text-container'>
-									<h4 className='est-login-form-text'>Phone</h4>
-									<Form.Item
-										name={'updPhone'}
-										rules={rulesValidationMask['rulesPhoneEN']}>
-										<InputMask
-											maskstyle={'est-auth-login-field-input'}
-											mask='+(1) 999 999 9999'
-											placeholder='+(1) 999 999 9999'
-										/>
-									</Form.Item>
-								</Col>
-
-								<Col
-									span={12}
-									className='est-login-form-upload-photo-container'>
-									<Uploadphoto
-										deleteItemImage={(data) => handleDeleteProfileImage(data)}
-										addItemImage={(data) => handleAddProfileImage(data)}
-									/>
-									<div className='est-profile-edit-modal-image-text-container'>
-										{props.item.photo && (
-											<>
-												<h4 className='est-profile-edit-modal-image-text'>
-													Current profile picture:
-												</h4>
-												<div className='est-profile-edit-modal-image-container'>
-													<Image
-														classImg={'est-profile-edit-modal-image'}
-														image={props.item.photo}
-														alt={'Imagen Profile'}
-														title={'Imagen Profile'}
-													/>
-												</div>
-											</>
-										)}
-									</div>
 								</Col>
 							</Row>
 							<Form.Item>

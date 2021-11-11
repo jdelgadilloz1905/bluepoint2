@@ -32,6 +32,7 @@ export default function App(props) {
 	const [isFileList, setFileList] = useState([])
 	const [isPreviewModal, setPreviewModal] = useState(false)
 	const [isPreviewImg, setPreviewImg] = useState('')
+
 	const [isProgress, setProgress] = useState(0)
 	const [isLoadingButtonProfile, setLoadingButtonProfile] = useState(false)
 	const [isTexto, setTexto] = useState('')
@@ -53,7 +54,7 @@ export default function App(props) {
 			if (response) {
 				setDatosUser(response)
 			} else {
-				window.location.href = '/'
+				//window.location.href = '/'
 			}
 		})
 	}, [])
@@ -98,13 +99,6 @@ export default function App(props) {
 			},
 		}
 		try {
-			//LOCAL
-			// const response = await axios.post(
-			// 	`${ENV_CORE}/api/patient/upload-image`,
-			// 	data,
-			// 	config
-			// )
-			//PRUEBA
 			const response = await axios.post(
 				`${ENV_UPLOAD_IMAGE}/api/products/upload-image`,
 				data,
@@ -128,8 +122,19 @@ export default function App(props) {
 		setPreviewImg(item.thumbUrl)
 	}
 
+	const registerDataPatient = async (item, image) => {
+		servicesCamera
+			.registerDatosPatient(item, isDatosuser, image)
+			.then((response) => {
+				if (response) {
+				} else {
+					//window.location.href = '/'
+				}
+			})
+	}
+
 	const submitToGoogle = async (url) => {
-		console.log('envio los datos para la extraccion')
+		//console.log('envio los datos para la extraccion')
 		try {
 			setLoadingButtonProfile(true)
 			let data = {
@@ -174,9 +179,8 @@ export default function App(props) {
 					DEPENDIENDO DE LA SELECCION DEL SEGURO BUSCA
 					LA POSICION EXACTA PARA EXTRAER EL ID
 					=============================================*/
-
-				console.log('texto total ', array[0].description)
 				setTexto(array[0].description)
+
 				// for (let x = 1; x < array.length; x++) {
 				// 	console.warn('resultado arriba ', array[x])
 				// 	if (array[x].description.includes('-')) {
@@ -184,6 +188,7 @@ export default function App(props) {
 				// 		console.info('aqui pasa todo ')
 				// 	}
 				// }
+				registerDataPatient(array, url)
 			})
 
 			setLoadingButtonProfile(false)

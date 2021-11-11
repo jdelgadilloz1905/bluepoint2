@@ -6,7 +6,7 @@ import { notification } from 'antd'
 
 import { ENV_CORE } from '../../../../components/Enviroment'
 
-export const GetAllUsers = async (traduce) => {
+export const GetAllUsers = async () => {
 	let returnResponse
 	await axios({
 		method: 'POST',
@@ -88,5 +88,54 @@ export const UpdatePassword = async (item) => {
 				description: `Check your internet connection`,
 			})
 		})
+	return returnResponse
+}
+
+export const SearchInsuranceDetail = async (item) => {
+	let returnResponse
+	await axios({
+		method: 'POST',
+		url: `${ENV_CORE}/api/patient/insurance-detail`,
+		data: item,
+	})
+		.then((response) => {
+			if (response.data.statusCode === 200) {
+				returnResponse = response.data.infoInsureDetail
+			} else {
+				returnResponse = null
+			}
+		})
+		.catch(() => {
+			notification['error']({
+				message: `Error`,
+				description: `Check your internet connection`,
+			})
+		})
+	return returnResponse
+}
+
+export const getAllInsurence = async () => {
+	let returnResponse
+	await axios({
+		method: 'POST',
+		url: `${ENV_CORE}/api/insurance/all`,
+	})
+		.then((response) => {
+			if (response.data.statusCode === 200) {
+				returnResponse = response.data.insuranceInfo
+			} else {
+				notification['warning']({
+					message: `Error`,
+					description: `No records found`,
+				})
+			}
+		})
+		.catch(() => {
+			notification['error']({
+				message: `Error`,
+				description: `Check your internet connection`,
+			})
+		})
+
 	return returnResponse
 }
