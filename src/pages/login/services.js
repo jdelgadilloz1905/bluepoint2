@@ -22,6 +22,8 @@ const servicesLogin = {
 			data: data,
 		})
 			.then((response) => {
+				console.log('resultado del login ', response.data)
+
 				if (response.data.statusCode === 200) {
 					notification['success']({
 						message: `Congratulations:`,

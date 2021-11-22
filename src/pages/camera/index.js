@@ -13,7 +13,7 @@ import Spin from 'antd/lib/spin'
 
 import Card from 'antd/lib/card'
 
-import { Form, Select, Image } from 'antd'
+import { Select } from 'antd'
 
 import { CameraOutlined } from '@ant-design/icons'
 
