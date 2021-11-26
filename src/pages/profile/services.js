@@ -8,13 +8,14 @@ import { ENV_CORE } from '../../components/Enviroment'
 
 export const ProfileDetail = async (item) => {
 	let returnResponse
-
+	console.log('datos user ', item)
 	await axios({
 		method: 'POST',
 		url: `${ENV_CORE}/api/auth/datos-user`,
 		data: { idUser: item },
 	})
 		.then((response) => {
+			console.log('respuesta ', response)
 			if (response.data.statusCode === 200) {
 				returnResponse = response.data.userInfo
 			} else {

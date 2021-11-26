@@ -142,6 +142,19 @@
 	border-color: #b1d084 !important;
 }
 
+.est-auth-off-profile-button {
+	background-color: #cf1e1e !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	margin: 0 15px !important;
+	color: white !important;
+}
+
+.est-auth-off-profile-button:hover {
+	background-color: #702626 !important;
+	border-color: #b1d084 !important;
+}
+
 @media (max-width: 1060px) {
 	.est-profile-info-title {
 		font-size: 13px;

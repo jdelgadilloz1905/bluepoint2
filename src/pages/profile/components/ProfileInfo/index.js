@@ -24,7 +24,7 @@ export default function ProfileInfo(props) {
 
 	const handleUpdatePassWord = async (item) => {
 		setLoading(true)
-		console.log('aqui paso los datos ')
+
 		const updatePassword = {
 			idUser: props.isUserProfileInfo.id,
 			newPassword: item.regPassword,
@@ -33,6 +33,12 @@ export default function ProfileInfo(props) {
 		await UpdatePassword(updatePassword).then(() => {})
 		setLoading(false)
 		update_profile_password.resetFields()
+	}
+
+	const handleLogOut = () => {
+		localStorage.removeItem('userSession')
+		setGlobal(() => ({ userEmail: null, userData: null }))
+		window.location.pathname = '/'
 	}
 
 	return (
@@ -127,6 +133,11 @@ export default function ProfileInfo(props) {
 								</h4>
 							</ul>
 						</div>
+						<Button
+							className='est-auth-off-profile-button'
+							onClick={() => handleLogOut()}>
+							Sign Off
+						</Button>
 					</Col>
 
 					<Col

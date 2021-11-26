@@ -4,7 +4,17 @@ import React, { useEffect, useState } from 'react'
 
 import { setGlobal, useGlobal } from 'reactn'
 
-import { Row, Col, Button, Modal, Form, Input, Divider, Comment } from 'antd'
+import {
+	Row,
+	Col,
+	Button,
+	Modal,
+	Form,
+	Input,
+	Divider,
+	Comment,
+	Select,
+} from 'antd'
 
 import { PoweroffOutlined } from '@ant-design/icons'
 
@@ -24,6 +34,7 @@ import {
 	ActivateUser,
 	UpdatePassword,
 	SearchInsuranceDetail,
+	getAllClients,
 } from './services'
 
 const Usersinfo = () => {
@@ -36,6 +47,9 @@ const Usersinfo = () => {
 	const [isLoading, setLoading] = useState(false)
 	const [isFilterList, setFilterList] = useState(null)
 	const [isInsuDetail, setInsuDetail] = useState(null)
+	const [isSelectClient, setSelectClient] = useState(null) //seguro seleccionado
+	const [isClients, setIsClients] = useState(null)
+	const { Option } = Select
 
 	const [isGetAllUsers] = useState({
 		service_global_description: 'Check your internet connection',
@@ -107,6 +121,17 @@ const Usersinfo = () => {
 
 		setAllUsers(filterList)
 	}
+	const handleChangeOption = (value) => {
+		const filter = value
+
+		let filterList = isFilterList.filter((data) => {
+			//data.client.id = data.client.id
+			//return data.client.id.indexOf(filter) !== -1
+			return data.client.id === filter
+		})
+
+		setAllUsers(filterList)
+	}
 
 	useEffect(() => {
 		if (window.innerWidth < 576) {
@@ -117,6 +142,9 @@ const Usersinfo = () => {
 				setAllUsers(response)
 				setFilterList(response)
 			}
+		})
+		getAllClients().then((response) => {
+			setIsClients(response)
 		})
 	}, [setAllUsers])
 
@@ -172,10 +200,10 @@ const Usersinfo = () => {
 					</Col>
 					<Col
 						xs={24}
-						sm={12}
-						md={12}
-						lg={12}
-						xl={12}
+						sm={5}
+						md={5}
+						lg={5}
+						xl={5}
 						className='est-general-list-users-banner-search-container'>
 						<Input
 							type='text'
@@ -184,6 +212,40 @@ const Usersinfo = () => {
 							className='est-general-list-users-banner-search'
 						/>
 					</Col>
+					<Col
+						xs={24}
+						sm={5}
+						md={5}
+						lg={5}
+						xl={5}
+						className='est-general-list-users-banner-select-container'>
+						{isClients && (
+							<Select
+								placeholder='Select a client'
+								style={{ width: 200 }}
+								onChange={handleChangeOption}>
+								{isClients.map((item, index) => (
+									<Option value={item.id} key={index}>
+										{item.name}
+									</Option>
+								))}
+							</Select>
+						)}
+					</Col>
+					<Col
+						xs={24}
+						sm={2}
+						md={2}
+						lg={2}
+						xl={2}
+						className='est-general-list-users-banner-select-container'>
+						<Button
+							className='est-general-list-sms-users-button'
+							type='primary'>
+							Send SMS
+						</Button>
+					</Col>
+
 					<Col
 						xs={24}
 						sm={4}
@@ -395,6 +457,12 @@ const Usersinfo = () => {
 											Type of login:
 										</span>{' '}
 										{isModalInfo.modo}
+									</h4>
+									<h4 className='est-manage-users-modal-title'>
+										<span className='est-manage-users-modal-title-span'>
+											Client:
+										</span>{' '}
+										{isModalInfo.client.name}
 									</h4>
 									<h4 className='est-manage-users-modal-title'>
 										<span className='est-manage-users-modal-title-span'>

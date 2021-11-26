@@ -139,3 +139,30 @@ export const getAllInsurence = async () => {
 
 	return returnResponse
 }
+
+export const getAllClients = async () => {
+	let returnResponse
+	await axios({
+		method: 'POST',
+		url: `${ENV_CORE}/api/clients/all`,
+		data: { id: null, valor: null },
+	})
+		.then((response) => {
+			if (response.data.statusCode === 200) {
+				returnResponse = response.data.clientsInfo
+			} else {
+				notification['warning']({
+					message: `Error`,
+					description: `No records found Clients`,
+				})
+			}
+		})
+		.catch(() => {
+			notification['error']({
+				message: `Error`,
+				description: `Check your internet connection`,
+			})
+		})
+
+	return returnResponse
+}

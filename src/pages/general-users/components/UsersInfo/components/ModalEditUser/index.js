@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 import { setGlobal, useGlobal } from 'reactn'
 
-import { Modal, Form, Button, notification, Row, Col } from 'antd'
+import { Modal, Form, Button, notification, Row, Col, Select } from 'antd'
 
 import { EditOutlined } from '@ant-design/icons'
 
@@ -17,7 +17,7 @@ import { rulesValidationMask } from '../../../../../../components/Inputs/InputMa
 
 import Uploadphoto from './components/UploadPhoto'
 
-import { GetAllUsers } from '../../services'
+import { GetAllUsers, getAllClients } from '../../services'
 
 import ProfileUpdate from './services'
 
@@ -29,6 +29,8 @@ export default function ModalLoginUser(props) {
 	const [isModalUser, setModalUser] = useState(false)
 	const [isNewPhoto, setNewPhoto] = useState(null)
 	const [isLoading] = useGlobal('LoadingButtonProfile')
+	const [isClients, setIsClients] = useState(null)
+	const { Option } = Select
 
 	const handleModalEditUser = () => {
 		if (isModalUser) {
@@ -36,6 +38,9 @@ export default function ModalLoginUser(props) {
 		} else {
 			setModalUser(true)
 		}
+		getAllClients().then((response) => {
+			setIsClients(response)
+		})
 	}
 
 	const handleEditUser = async (item) => {
@@ -109,6 +114,7 @@ export default function ModalLoginUser(props) {
 							updEmail: props.item.email,
 							updId: props.item.id,
 							updPhone: props.item.phone,
+							updClient: props.item.client.id,
 						}}
 						name='user_edit'
 						onFinish={handleEditUser}>
@@ -180,6 +186,29 @@ export default function ModalLoginUser(props) {
 											placeholder='+(1) 999 999 9999'
 										/>
 									</Form.Item>
+								</Col>
+
+								<Col span={24} className='est-login-form-text-container'>
+									{isClients && (
+										<div className='est-create-user-modal-selector'>
+											<h4 className='est-login-form-text'>Select Client</h4>
+											<Form.Item
+												name='updClient'
+												rules={[
+													{
+														required: true,
+													},
+												]}>
+												<Select>
+													{isClients.map((item, index) => (
+														<Option value={item.id} key={index}>
+															{item.name}
+														</Option>
+													))}
+												</Select>
+											</Form.Item>
+										</div>
+									)}
 								</Col>
 
 								<Col

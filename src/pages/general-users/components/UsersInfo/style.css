@@ -23,6 +23,12 @@
 	display: flex;
 	justify-content: center;
 }
+.est-general-list-users-banner-select-container {
+	margin-top: 5px;
+	padding-left: 15px;
+	display: flex;
+	justify-content: center;
+}
 
 .est-general-list-users-banner-search-container .ant-form-item {
 	margin-bottom: 0;
@@ -323,6 +329,27 @@
 	display: flex !important;
 	justify-content: flex-end !important;
 	padding-right: 20px;
+}
+
+.est-general-list-sms-users-button {
+	background-color: #296120 !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	color: white !important;
+	font-size: 13px !important;
+	height: 32px !important;
+	padding: 14px 10px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	margin: 1px 5px 0px 5px;
+}
+
+.est-general-list-sms-users-button:hover,
+.est-general-list-sms-users-button:active,
+.est-general-list-sms-users-button:focus {
+	background-color: #467e19 !important;
+	border-color: #b1d084 !important;
 }
 
 @media (max-width: 992px) {

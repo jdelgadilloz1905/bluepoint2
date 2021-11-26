@@ -96,7 +96,9 @@ export default function ModaluserInsurance(props) {
 				okText='Confirmar'
 				cancelButtonProps={{ style: { display: 'none' } }}
 				okButtonProps={{ style: { display: 'none' } }}>
-				<h3 className='est-auth-edit-profile-modal-title'>Edit patient data</h3>
+				<h3 className='est-auth-edit-profile-modal-title'>
+					Edit insurance data
+				</h3>
 				{props.item && (
 					<Form
 						form={form}
@@ -189,12 +191,6 @@ export default function ModaluserInsurance(props) {
 								<Col span={24} className='est-login-form-text-container'>
 									{isInsurance && (
 										<div className='est-create-user-modal-selector'>
-											{/* <h4 className='est-manage-users-modal-title'>
-												<span className='est-manage-users-modal-title-span'>
-													Current insurance:
-												</span>{' '}
-												{props.item.name_insurance}
-											</h4> */}
 											<h4 className='est-login-form-text'>Select insurance</h4>
 											<Form.Item
 												name='insurance'

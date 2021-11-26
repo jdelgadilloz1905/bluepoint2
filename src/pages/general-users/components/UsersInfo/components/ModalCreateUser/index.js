@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { setGlobal } from 'reactn'
 
@@ -12,7 +12,7 @@ import InputMask from '../../../../../../components/Inputs/InputMask'
 import { rulesValidation } from '../../../../../../components/Inputs/Normal/rules'
 import { rulesValidationMask } from '../../../../../../components/Inputs/InputMask/rules'
 
-import { GetAllUsers } from '../../services'
+import { GetAllUsers, getAllClients } from '../../services'
 
 import CreateUserService from './services'
 
@@ -23,6 +23,13 @@ const CreateUser = () => {
 	const { Option } = Select
 	const [isVisible, setVisible] = useState(false)
 	const [isLoading, setLoading] = useState(false)
+	const [isClients, setIsClients] = useState(null)
+
+	useEffect(() => {
+		getAllClients().then((response) => {
+			setIsClients(response)
+		})
+	}, [])
 
 	const handleCreateUser = async (item) => {
 		delete item.confirm
@@ -134,6 +141,26 @@ const CreateUser = () => {
 									</Form.Item>
 								</div>
 							</Col>
+							{isClients && (
+								<Col span={24} className='est-login-form-text-container'>
+									<h4 className='est-login-form-text'>Client</h4>
+									<div className='est-create-user-modal-selector'>
+										<Form.Item
+											name={'regClient'}
+											label=''
+											rules={[{ required: true }]}>
+											<Select placeholder='Select a client'>
+												{isClients.map((item, index) => (
+													<Option value={item.id} key={index}>
+														{item.name}
+													</Option>
+												))}
+											</Select>
+										</Form.Item>
+									</div>
+								</Col>
+							)}
+
 							<Col span={24} className='est-login-form-text-container'>
 								<h4 className='est-login-form-text'>Password</h4>
 								<Input

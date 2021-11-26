@@ -8,7 +8,6 @@ import Select from 'antd/lib/select'
 
 import Input from '../../components/Inputs/Normal'
 import Image from '../../components/Image'
-import clientsData from './clients.json'
 
 import servicesLogin from './services'
 
@@ -18,12 +17,7 @@ export default function LoginUser() {
 	const [form] = Form.useForm()
 	const [isLoading, setLoading] = useState(false)
 
-	const [isSelectClient, setSelectClient] = useState(null) //cliente seleccionado
-
-	const { Option } = Select
-
 	const handleLoginUser = async (item) => {
-		return
 		setLoading(true)
 		await servicesLogin.Login(item).then((response) => {
 			if (response.email) {
@@ -33,13 +27,6 @@ export default function LoginUser() {
 		})
 		setLoading(false)
 	}
-
-	const handleChangeOption = (value) => {
-		setSelectClient(value)
-
-		console.log('cliente seleccionado ', value)
-	}
-
 	return (
 		<div className='est-auth-login-global-container'>
 			<div className='est-auth-login-main-container'>
@@ -82,21 +69,7 @@ export default function LoginUser() {
 							inputNameRules={'rulesPasswordEN'}
 						/>
 					</div>
-					{clientsData && (
-						<div>
-							<Form.Item name='client' label='' rules={[{ required: true }]}>
-								<Select
-									onChange={handleChangeOption}
-									placeholder='Select a client'>
-									{clientsData.map((item, index) => (
-										<Option value={item.value} key={index}>
-											{item.label}
-										</Option>
-									))}
-								</Select>
-							</Form.Item>
-						</div>
-					)}
+
 					<Form.Item>
 						<div>
 							<div className='est-auth-login-button-container'>
