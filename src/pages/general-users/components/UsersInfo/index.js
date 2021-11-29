@@ -14,6 +14,7 @@ import {
 	Divider,
 	Comment,
 	Select,
+	notification,
 } from 'antd'
 
 import { PoweroffOutlined } from '@ant-design/icons'
@@ -133,6 +134,14 @@ const Usersinfo = () => {
 		setAllUsers(filterList)
 	}
 
+	const handleSendSMS = () => {
+		notification['success']({
+			message: `Congratulations`,
+			description: `Enviar los sms `,
+		})
+		console.log('usuarios a enviar los sms ', isAllUsers)
+	}
+
 	useEffect(() => {
 		if (window.innerWidth < 576) {
 			setMobile(true)
@@ -241,7 +250,8 @@ const Usersinfo = () => {
 						className='est-general-list-users-banner-select-container'>
 						<Button
 							className='est-general-list-sms-users-button'
-							type='primary'>
+							type='primary'
+							onClick={() => handleSendSMS()}>
 							Send SMS
 						</Button>
 					</Col>
