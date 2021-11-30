@@ -15,7 +15,13 @@ import {
 	Comment,
 	Select,
 	notification,
+	Upload,
+	message,
 } from 'antd'
+
+import { UploadOutlined } from '@ant-design/icons'
+
+import { OutTable, ExcelRenderer } from 'react-excel-renderer'
 
 import { PoweroffOutlined } from '@ant-design/icons'
 
@@ -36,6 +42,7 @@ import {
 	UpdatePassword,
 	SearchInsuranceDetail,
 	getAllClients,
+	postRegisterLoteUsers,
 } from './services'
 
 const Usersinfo = () => {
@@ -50,6 +57,7 @@ const Usersinfo = () => {
 	const [isInsuDetail, setInsuDetail] = useState(null)
 	const [isSelectClient, setSelectClient] = useState(null) //seguro seleccionado
 	const [isClients, setIsClients] = useState(null)
+	const [file, setFile] = useState(null)
 	const { Option } = Select
 
 	const [isGetAllUsers] = useState({
@@ -117,7 +125,9 @@ const Usersinfo = () => {
 		let filterList = isFilterList.filter((data) => {
 			data.name = data.name.toLowerCase()
 			data.last = data.last.toLowerCase()
-			return data.name.indexOf(filter) !== -1 || data.last.indexOf(filter) !== -1
+			return (
+				data.name.indexOf(filter) !== -1 || data.last.indexOf(filter) !== -1
+			)
 		})
 
 		setAllUsers(filterList)
@@ -142,9 +152,70 @@ const Usersinfo = () => {
 		console.log('usuarios a enviar los sms ', isAllUsers)
 	}
 
-	const handleInputChange = () => {
+	const handleArchivePreview = async (fileList) => {
+		let fileObj = fileList
+		if (!fileObj) {
+			notification['error']({
+				message: `Error`,
+				description: `No file uploaded! `,
+			})
+			return
+		}
 
-
+		console.log('fileObj.type:', fileObj.type)
+		if (
+			!(
+				fileObj.type === 'application/vnd.ms-excel' ||
+				fileObj.type ===
+					'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+			)
+		) {
+			notification['error']({
+				message: `Error`,
+				description: `Unknown file format. Only Excel files are uploaded! `,
+			})
+			return
+		}
+		console.log('comienzo ', fileObj)
+		ExcelRenderer(fileObj, (err, resp) => {
+			if (err) {
+				console.log(err)
+			} else {
+				let newRows = []
+				resp.rows.slice(1).map((row, index) => {
+					if (row && row !== 'undefined') {
+						newRows.push({
+							key: index,
+							id_client: row[0],
+							email: row[1],
+							name: row[2],
+							last: row[3],
+							phone: row[4],
+							photo: row[5],
+							message: row[6],
+						})
+					}
+				})
+				if (newRows.length === 0) {
+					notification['error']({
+						message: `Error`,
+						description: `No data found in file! `,
+					})
+					return
+				} else {
+					postRegisterLoteUsers(newRows).then((response) => {
+						if (response) {
+							GetAllUsers(isGetAllUsers).then((response) => {
+								if (response) {
+									setAllUsers(response)
+								}
+							})
+						}
+					})
+					console.log('Rows ', newRows)
+				}
+			}
+		})
 	}
 
 	useEffect(() => {
@@ -253,15 +324,14 @@ const Usersinfo = () => {
 						lg={2}
 						xl={2}
 						className='est-general-list-users-banner-select-container'>
-							<Input
-								type='text'
-								onChange={(item) => handleSearchList(item)}
-								placeholder={'Search...'}
-								className='est-general-list-users-banner-search'
-							/>
-						
+						<Input
+							type='text'
+							onChange={(item) => handleSearchList(item)}
+							placeholder={'Search...'}
+							className='est-general-list-users-banner-search'
+						/>
 					</Col>
-										
+
 					<Col
 						xs={24}
 						sm={4}
@@ -273,20 +343,20 @@ const Usersinfo = () => {
 					</Col>
 				</Row>
 				<Row className='est-general-list-users-banner-container'>
-				<Col
+					<Col
 						xs={24}
 						sm={2}
 						md={2}
 						lg={2}
 						xl={2}
 						className='est-general-list-users-banner-select-container'>
-							{/*https://medium.com/@leopoldoramonmontesinos/react-js-transformar-datos-de-excel-a-json-94a101710f09*/}
-						<Input
-								type='file'
-								onChange={(item) => handleInputChange(item)}
-								placeholder={'Upload archive excel...'}
-								className='est-general-list-users-banner-search'
-							/>
+						<Upload
+							name='file'
+							className='est-general-list-users-banner-search'
+							listType='picture'
+							beforeUpload={handleArchivePreview}>
+							<Button icon={<UploadOutlined />}>Upload</Button>
+						</Upload>
 					</Col>
 				</Row>
 

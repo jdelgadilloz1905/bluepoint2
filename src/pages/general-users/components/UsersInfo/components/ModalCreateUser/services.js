@@ -7,8 +7,6 @@ import notification from 'antd/lib/notification'
 import { ENV_CORE } from '../../../../../../components/Enviroment'
 
 export default async function CreateUserService(item) {
-	console.log('datos a enviar ', item)
-
 	let returnResponse
 	await axios({
 		method: 'POST',

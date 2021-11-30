@@ -166,3 +166,33 @@ export const getAllClients = async () => {
 
 	return returnResponse
 }
+
+export const postRegisterLoteUsers = async (item) => {
+	let returnResponse
+	await axios({
+		method: 'POST',
+		url: `${ENV_CORE}/api/clients/patient-register-lot`,
+		data: item,
+	})
+		.then((response) => {
+			if (response.data.statusCode === 200) {
+				notification['success']({
+					message: `Congratulations`,
+					description: `patients created successfully`,
+				})
+				returnResponse = response
+			} else {
+				notification['warning']({
+					message: `Warning`,
+					description: `Error creating patients or there is already a user registered with that email`,
+				})
+			}
+		})
+		.catch(() => {
+			notification['error']({
+				message: `Error`,
+				description: `Check your internet connection`,
+			})
+		})
+	return returnResponse
+}
