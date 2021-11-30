@@ -115,9 +115,9 @@ const Usersinfo = () => {
 	const handleSearchList = (item) => {
 		const filter = item.target.value
 		let filterList = isFilterList.filter((data) => {
-			data.info_card = data.info_card.toLowerCase()
-
-			return data.info_card.indexOf(filter) !== -1
+			data.name = data.name.toLowerCase()
+			data.last = data.last.toLowerCase()
+			return data.name.indexOf(filter) !== -1 || data.last.indexOf(filter) !== -1
 		})
 
 		setAllUsers(filterList)
@@ -140,6 +140,11 @@ const Usersinfo = () => {
 			description: `Enviar los sms `,
 		})
 		console.log('usuarios a enviar los sms ', isAllUsers)
+	}
+
+	const handleInputChange = () => {
+
+
 	}
 
 	useEffect(() => {
@@ -248,14 +253,15 @@ const Usersinfo = () => {
 						lg={2}
 						xl={2}
 						className='est-general-list-users-banner-select-container'>
-						<Button
-							className='est-general-list-sms-users-button'
-							type='primary'
-							onClick={() => handleSendSMS()}>
-							Send SMS
-						</Button>
+							<Input
+								type='text'
+								onChange={(item) => handleSearchList(item)}
+								placeholder={'Search...'}
+								className='est-general-list-users-banner-search'
+							/>
+						
 					</Col>
-
+										
 					<Col
 						xs={24}
 						sm={4}
@@ -264,6 +270,23 @@ const Usersinfo = () => {
 						xl={12}
 						className='est-general-list-create-user-container'>
 						<ModalCreateUser />
+					</Col>
+				</Row>
+				<Row className='est-general-list-users-banner-container'>
+				<Col
+						xs={24}
+						sm={2}
+						md={2}
+						lg={2}
+						xl={2}
+						className='est-general-list-users-banner-select-container'>
+							{//https://medium.com/@leopoldoramonmontesinos/react-js-transformar-datos-de-excel-a-json-94a101710f09}
+						<Input
+								type='file'
+								onChange={(item) => handleInputChange(item)}
+								placeholder={'Upload archive excel...'}
+								className='est-general-list-users-banner-search'
+							/>
 					</Col>
 				</Row>
 
@@ -281,7 +304,7 @@ const Usersinfo = () => {
 						<h3 className='est-general-list-users-list-main-title'>Name</h3>
 					</Col>
 					<Col md={3} lg={3} xl={3}>
-						<h3 className='est-general-list-users-list-main-title'>Mode</h3>
+						<h3 className='est-general-list-users-list-main-title'>Phone</h3>
 					</Col>
 					<Col md={5} lg={5} xl={5}>
 						<h3 className='est-general-list-users-list-main-title'>Actions</h3>
@@ -360,9 +383,9 @@ const Usersinfo = () => {
 								xl={3}>
 								<h4 className='est-general-list-users-title'>
 									<span className='est-general-list-users-list-main-title-responsive'>
-										Mode:
+										Phone:
 									</span>
-									{item.modo}
+									{item.phone}
 								</h4>
 							</Col>
 							<Col
