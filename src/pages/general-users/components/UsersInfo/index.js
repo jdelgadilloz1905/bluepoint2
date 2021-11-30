@@ -280,7 +280,7 @@ const Usersinfo = () => {
 						lg={2}
 						xl={2}
 						className='est-general-list-users-banner-select-container'>
-							{//https://medium.com/@leopoldoramonmontesinos/react-js-transformar-datos-de-excel-a-json-94a101710f09}
+							{/*https://medium.com/@leopoldoramonmontesinos/react-js-transformar-datos-de-excel-a-json-94a101710f09*/}
 						<Input
 								type='file'
 								onChange={(item) => handleInputChange(item)}
