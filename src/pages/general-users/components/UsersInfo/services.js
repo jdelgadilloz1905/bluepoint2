@@ -175,16 +175,27 @@ export const postRegisterLoteUsers = async (item) => {
 		data: item,
 	})
 		.then((response) => {
+			console.log("resultado ",response)
 			if (response.data.statusCode === 200) {
-				notification['success']({
-					message: `Congratulations`,
-					description: `patients created successfully`,
-				})
+				
+				let resultado = response.data.infoResult
+				if(resultado.length ===0 ){
+					notification['success']({
+						message: `Congratulations`,
+						description: `patients created successfully`,
+					})
+				}else{
+					notification['warning']({
+						message: `Warning`,
+						description: `List of unregistered patients, ${JSON.stringify(response.data.infoResult)}`,
+					})
+				}
+				
 				returnResponse = response
 			} else {
 				notification['warning']({
 					message: `Warning`,
-					description: `Error creating patients or there is already a user registered with that email`,
+					description: `List of unregistered patients,`,
 				})
 			}
 		})

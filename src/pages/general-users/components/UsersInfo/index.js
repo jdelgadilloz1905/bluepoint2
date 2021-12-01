@@ -324,12 +324,13 @@ const Usersinfo = () => {
 						lg={2}
 						xl={2}
 						className='est-general-list-users-banner-select-container'>
-						<Input
-							type='text'
-							onChange={(item) => handleSearchList(item)}
-							placeholder={'Search...'}
-							className='est-general-list-users-banner-search'
-						/>
+
+							<Button
+								className='est-users-manage-list-button'
+								onClick={(item) => handleSendSMS(item)}>
+								Send SMS
+							</Button>
+						
 					</Col>
 
 					<Col
@@ -352,6 +353,8 @@ const Usersinfo = () => {
 						className='est-general-list-users-banner-select-container'>
 						<Upload
 							name='file'
+							multiple={false}
+							status='success'
 							className='est-general-list-users-banner-search'
 							listType='picture'
 							beforeUpload={handleArchivePreview}>

@@ -15,7 +15,7 @@ export const ProfileDetail = async (item) => {
 		data: { idUser: item },
 	})
 		.then((response) => {
-			console.log('respuesta ', response)
+			
 			if (response.data.statusCode === 200) {
 				returnResponse = response.data.userInfo
 			} else {
