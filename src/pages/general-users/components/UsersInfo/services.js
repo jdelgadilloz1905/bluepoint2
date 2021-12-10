@@ -175,22 +175,63 @@ export const postRegisterLoteUsers = async (item) => {
 		data: item,
 	})
 		.then((response) => {
-			console.log("resultado ",response)
 			if (response.data.statusCode === 200) {
-				
 				let resultado = response.data.infoResult
-				if(resultado.length ===0 ){
+				if (resultado.length === 0) {
 					notification['success']({
 						message: `Congratulations`,
 						description: `patients created successfully`,
 					})
-				}else{
+				} else {
 					notification['warning']({
 						message: `Warning`,
-						description: `List of unregistered patients, ${JSON.stringify(response.data.infoResult)}`,
+						description: `List of unregistered patients, ${JSON.stringify(
+							response.data.infoResult
+						)}`,
 					})
 				}
-				
+
+				returnResponse = response
+			} else {
+				notification['warning']({
+					message: `Warning`,
+					description: `List of unregistered patients,`,
+				})
+			}
+		})
+		.catch(() => {
+			notification['error']({
+				message: `Error`,
+				description: `Check your internet connection`,
+			})
+		})
+	return returnResponse
+}
+
+export const SendSmsPatients = async (item) => {
+	let returnResponse
+	await axios({
+		method: 'POST',
+		url: `${ENV_CORE}/api/clients/patient-sms-send`,
+		data: item,
+	})
+		.then((response) => {
+			if (response.data.statusCode === 200) {
+				let resultado = response.data.infoResult
+				if (resultado.length === 0) {
+					notification['success']({
+						message: `Congratulations`,
+						description: `SMS sent successfully`,
+					})
+				} else {
+					notification['warning']({
+						message: `Warning`,
+						description: `List of unregistered patients, ${JSON.stringify(
+							response.data.infoResult
+						)}`,
+					})
+				}
+
 				returnResponse = response
 			} else {
 				notification['warning']({

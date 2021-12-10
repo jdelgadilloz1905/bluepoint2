@@ -9,6 +9,7 @@ import NoFound from '../pages/not-found'
 import Profile from '../pages/profile'
 import GeneralUsers from '../pages/general-users'
 import GeneralInsurance from '../pages/general-insurance'
+import GeneralSms from '../pages/general-sms'
 
 const Routers = () => (
 	<BrowserRouter>
@@ -17,6 +18,7 @@ const Routers = () => (
 			<Route exact path='/profile' component={Profile} />
 			<Route exact path='/general-users' component={GeneralUsers} />
 			<Route exact path='/general-insurance' component={GeneralInsurance} />
+			<Route exact path='/general-sms' component={GeneralSms} />
 			<Route exact path='/:id' component={Camera} />
 			<Route path='*' component={NoFound} />
 		</Switch>

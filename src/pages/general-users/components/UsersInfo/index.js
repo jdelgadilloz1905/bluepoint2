@@ -17,6 +17,7 @@ import {
 	notification,
 	Upload,
 	message,
+	Spin,
 } from 'antd'
 
 import { UploadOutlined } from '@ant-design/icons'
@@ -43,6 +44,7 @@ import {
 	SearchInsuranceDetail,
 	getAllClients,
 	postRegisterLoteUsers,
+	SendSmsPatients,
 } from './services'
 
 const Usersinfo = () => {
@@ -58,11 +60,27 @@ const Usersinfo = () => {
 	const [isSelectClient, setSelectClient] = useState(null) //seguro seleccionado
 	const [isClients, setIsClients] = useState(null)
 	const [file, setFile] = useState(null)
+	const [isLoadingButtonProfile, setLoadingButtonProfile] = useState(false)
 	const { Option } = Select
 
 	const [isGetAllUsers] = useState({
 		service_global_description: 'Check your internet connection',
 	})
+
+	const loadingSpin = () => {
+		if (isLoadingButtonProfile) {
+			return (
+				<Modal
+					wrapClassName='est-upload-image-camera-modal'
+					visible={isLoadingButtonProfile}
+					title=''
+					footer={null}
+					onCancel={() => setLoadingButtonProfile(false)}>
+					{isLoadingButtonProfile && <Spin tip='Processing image...'></Spin>}
+				</Modal>
+			)
+		}
+	}
 
 	const handleManageUser = (item) => {
 		//buscar los datos del seguro :)
@@ -144,15 +162,8 @@ const Usersinfo = () => {
 		setAllUsers(filterList)
 	}
 
-	const handleSendSMS = () => {
-		notification['success']({
-			message: `Congratulations`,
-			description: `Enviar los sms `,
-		})
-		console.log('usuarios a enviar los sms ', isAllUsers)
-	}
-
-	const handleArchivePreview = async (fileList) => {
+	const handleSendSMS = (fileList) => {
+		setLoadingButtonProfile(true)
 		let fileObj = fileList
 		if (!fileObj) {
 			notification['error']({
@@ -162,7 +173,6 @@ const Usersinfo = () => {
 			return
 		}
 
-		console.log('fileObj.type:', fileObj.type)
 		if (
 			!(
 				fileObj.type === 'application/vnd.ms-excel' ||
@@ -176,7 +186,69 @@ const Usersinfo = () => {
 			})
 			return
 		}
-		console.log('comienzo ', fileObj)
+
+		ExcelRenderer(fileObj, (err, resp) => {
+			if (err) {
+				console.log(err)
+			} else {
+				let newRows = []
+				resp.rows.slice(1).map((row, index) => {
+					if (row && row !== 'undefined') {
+						newRows.push({
+							key: index,
+							id_client: row[0],
+							phone: row[1],
+							photo: row[2],
+							quote: row[3],
+							message: row[4],
+						})
+					}
+				})
+				if (newRows.length === 0) {
+					notification['error']({
+						message: `Error`,
+						description: `No data found in file! `,
+					})
+					return
+				} else {
+					SendSmsPatients(newRows).then((response) => {
+						if (response) {
+							//llevarlo al layout de sms y que aparezca los mensajes enviados y validar si tienen actualziacion para cambiarlo en base de datos
+							//filtrar lo del dia actual
+							console.log(response)
+						}
+					})
+				}
+			}
+		})
+
+		setLoadingButtonProfile(false)
+	}
+
+	const handleArchivePreview = async (fileList) => {
+		let fileObj = fileList
+		if (!fileObj) {
+			notification['error']({
+				message: `Error`,
+				description: `No file uploaded! `,
+			})
+			return
+		}
+
+		if (
+			!(
+				fileObj.type === 'application/vnd.ms-excel' ||
+				fileObj.type ===
+					'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+			)
+		) {
+			notification['error']({
+				message: `Error`,
+				description: `Unknown file format. Only Excel files are uploaded! `,
+			})
+			return
+		}
+
 		ExcelRenderer(fileObj, (err, resp) => {
 			if (err) {
 				console.log(err)
@@ -238,6 +310,7 @@ const Usersinfo = () => {
 	} else
 		return (
 			<>
+				{loadingSpin()}
 				{isMobile && (
 					<Row className='est-general-list-users-banner-container-responsive'>
 						<Col xs={12}>
@@ -285,10 +358,10 @@ const Usersinfo = () => {
 					</Col>
 					<Col
 						xs={24}
-						sm={5}
-						md={5}
-						lg={5}
-						xl={5}
+						sm={6}
+						md={6}
+						lg={6}
+						xl={6}
 						className='est-general-list-users-banner-search-container'>
 						<Input
 							type='text'
@@ -317,21 +390,6 @@ const Usersinfo = () => {
 							</Select>
 						)}
 					</Col>
-					<Col
-						xs={24}
-						sm={2}
-						md={2}
-						lg={2}
-						xl={2}
-						className='est-general-list-users-banner-select-container'>
-
-							<Button
-								className='est-users-manage-list-button'
-								onClick={(item) => handleSendSMS(item)}>
-								Send SMS
-							</Button>
-						
-					</Col>
 
 					<Col
 						xs={24}
@@ -352,13 +410,32 @@ const Usersinfo = () => {
 						xl={2}
 						className='est-general-list-users-banner-select-container'>
 						<Upload
+							action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
 							name='file'
 							multiple={false}
 							status='success'
 							className='est-general-list-users-banner-search'
 							listType='picture'
 							beforeUpload={handleArchivePreview}>
-							<Button icon={<UploadOutlined />}>Upload</Button>
+							<Button icon={<UploadOutlined />}>Upload Patients</Button>
+						</Upload>
+					</Col>
+					<Col
+						xs={24}
+						sm={2}
+						md={2}
+						lg={20}
+						xl={20}
+						className='est-general-list-users-banner-select-container'>
+						<Upload
+							action='//jsonplaceholder.typicode.com/posts/'
+							name='file'
+							multiple={false}
+							status='success'
+							className='est-general-list-users-banner-search'
+							listType='picture'
+							beforeUpload={handleSendSMS}>
+							<Button icon={<UploadOutlined />}>Send SMS</Button>
 						</Upload>
 					</Col>
 				</Row>

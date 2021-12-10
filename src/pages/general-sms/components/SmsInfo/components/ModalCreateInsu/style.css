@@ -1,0 +1,22 @@
+/** @format */
+
+.est-general-list-create-users-button {
+	background-color: #296120 !important;
+	border-color: #b1d084 !important;
+	border-radius: 5px !important;
+	color: white !important;
+	font-size: 13px !important;
+	height: 32px !important;
+	padding: 14px 10px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	margin: 5px 5px 0px 5px;
+}
+
+.est-general-list-create-users-button:hover,
+.est-general-list-create-users-button:active,
+.est-general-list-create-users-button:focus {
+	background-color: #467e19 !important;
+	border-color: #b1d084 !important;
+}
