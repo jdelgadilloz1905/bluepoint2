@@ -1,6 +1,6 @@
 /** @format */
 
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Spin from 'antd/lib/spin'
 import { LoadingOutlined } from '@ant-design/icons'

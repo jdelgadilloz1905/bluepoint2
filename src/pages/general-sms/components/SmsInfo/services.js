@@ -6,19 +6,20 @@ import { notification } from 'antd'
 
 import { ENV_CORE } from '../../../../components/Enviroment'
 
-export const GetAllInsurance = async () => {
+export const GetAllSms = async () => {
 	let returnResponse
 	await axios({
 		method: 'POST',
-		url: `${ENV_CORE}/api/insurance/all`,
+		url: `${ENV_CORE}/api/patient/all-sms`,
+		data: { id: null, valor: null },
 	})
 		.then((response) => {
 			if (response.data.statusCode === 200) {
-				returnResponse = response.data.insuranceInfo
+				returnResponse = response.data.patientSms
 			} else {
 				notification['warning']({
-					message: 'Warning:',
-					description: `Service error: REACT_APP_SERVICE_CORE - Insurance Info`,
+					message: `Error`,
+					description: `No records found Sms`,
 				})
 			}
 		})
@@ -28,57 +29,28 @@ export const GetAllInsurance = async () => {
 				description: `Check your internet connection`,
 			})
 		})
+
 	return returnResponse
 }
 
-export const ActivateInsurance = async (item) => {
+export const SendSmsPatient = async (item) => {
 	let returnResponse
 	await axios({
 		method: 'POST',
-		url: `${ENV_CORE}/api/auth/delete-user`,
+		url: `${ENV_CORE}/api/clients/patient-sms-one-send`,
 		data: item,
 	})
 		.then((response) => {
 			if (response.data.statusCode === 200) {
-				returnResponse = response.data
 				notification['success']({
 					message: `Congratulations`,
-					description: `User updated successfully`,
+					description: `SMS sent successfully`,
 				})
-			} else {
-				notification['warning']({
-					message: `Warning:`,
-					description: `Service error: REACT_APP_SERVICE_CORE - User Info`,
-				})
-			}
-		})
-		.catch(() => {
-			notification['error']({
-				message: `Error`,
-				description: `Check your internet connection`,
-			})
-		})
-	return returnResponse
-}
-
-export const DeleteInsurance = async (item) => {
-	let returnResponse
-	await axios({
-		method: 'POST',
-		url: `${ENV_CORE}/api/auth/delete-insurance`,
-		data: item,
-	})
-		.then((response) => {
-			if (response.data.statusCode === 200) {
 				returnResponse = response.data
-				notification['success']({
-					message: `Congratulations`,
-					description: `Password updated successfully`,
-				})
 			} else {
-				notification['warning']({
-					message: 'Warning:',
-					description: `Service error: REACT_APP_SERVICE_CORE - User Info`,
+				notification['error']({
+					message: `Error`,
+					description: `The message could not be sent`,
 				})
 			}
 		})

@@ -17,6 +17,7 @@ import { Select } from 'antd'
 
 import { CameraOutlined } from '@ant-design/icons'
 
+import Logo from '../../components/Gif'
 import {
 	ENV_CORE,
 	ENV_KEY_GOOGLE_VISION,
@@ -35,6 +36,7 @@ export default function App(props) {
 
 	const [isProgress, setProgress] = useState(0)
 	const [isLoadingButtonProfile, setLoadingButtonProfile] = useState(false)
+	const [isLoadingGif, setLoadingGif] = useState(false)
 	const [isTexto, setTexto] = useState('')
 	const [isInsurance, setInsurance] = useState(null) //todos los seguros
 	const [isDatosuser, setDatosUser] = useState(null) //datos del paciente
@@ -44,19 +46,24 @@ export default function App(props) {
 
 	//const { Dragger } = Upload
 	useEffect(() => {
-		servicesCamera.getAllInsurence().then((response) => {
-			if (response) {
-				setInsurance(response)
-			}
-		})
+		setLoadingGif(true)
 
-		servicesCamera.getDatosPatient(props.match.params.id).then((response) => {
-			if (response) {
-				setDatosUser(response)
-			} else {
-				//window.location.href = '/'
-			}
-		})
+		setTimeout(() => {
+			servicesCamera.getAllInsurence().then((response) => {
+				if (response) {
+					setInsurance(response)
+				}
+			})
+
+			servicesCamera.getDatosPatient(props.match.params.id).then((response) => {
+				if (response) {
+					setDatosUser(response)
+				} else {
+					//window.location.href = '/'
+				}
+			})
+			setLoadingGif(false)
+		}, 5000)
 	}, [])
 
 	const handleOnChangeImage = ({ fileList }) => {
@@ -80,6 +87,12 @@ export default function App(props) {
 					{isLoadingButtonProfile && <Spin tip='Processing image...'></Spin>}
 				</Modal>
 			)
+		}
+	}
+
+	const loadingGif = () => {
+		if (isLoadingGif) {
+			return <Logo />
 		}
 	}
 
@@ -218,14 +231,16 @@ export default function App(props) {
 				name={'description'}
 				content={'Insurance Site'}
 			/>
-			<div className='est-camera-info-container'>
-				<p>{`Hello ${
-					isDatosuser ? isDatosuser.name : ''
-				}, please select the insurance and take a photo of the passport`}</p>
+			{loadingGif()}
+			{!isLoadingGif && (
+				<div className='est-camera-info-container'>
+					<p>{`Hello ${
+						isDatosuser ? isDatosuser.name : ''
+					}, please select the insurance and take a photo of the passport`}</p>
 
-				<Card bordered={false} style={{ width: 300 }}>
-					{loadingSpin()}
-					{/* {isInsurance && (
+					<Card bordered={false} style={{ width: 300 }}>
+						{loadingSpin()}
+						{/* {isInsurance && (
 						<Form>
 							<h4 className='est-login-form-text'>Select insurance</h4>
 							<div className='est-create-user-modal-selector'>
@@ -241,45 +256,46 @@ export default function App(props) {
 							</div>
 						</Form>
 					)} */}
-					<div className='est-upload-image-camera-container'>
-						<Upload
-							accept='image/*'
-							customRequest={handleUploadImage}
-							onChange={handleOnChangeImage}
-							onPreview={handlePreview}
-							onRemove={handleImageDelete}
-							listType='picture-card'
-							className='image-upload-grid'>
-							{isFileList.length >= 1 ? null : (
-								<div className='est-upload-image-camera-text-global-container'>
-									<div className='est-upload-image-camera-icon-container'>
-										<span>
-											<CameraOutlined />
-										</span>
+						<div className='est-upload-image-camera-container'>
+							<Upload
+								accept='image/*'
+								customRequest={handleUploadImage}
+								onChange={handleOnChangeImage}
+								onPreview={handlePreview}
+								onRemove={handleImageDelete}
+								listType='picture-card'
+								className='image-upload-grid'>
+								{isFileList.length >= 1 ? null : (
+									<div className='est-upload-image-camera-text-global-container'>
+										<div className='est-upload-image-camera-icon-container'>
+											<span>
+												<CameraOutlined />
+											</span>
+										</div>
 									</div>
-								</div>
-							)}
-						</Upload>
+								)}
+							</Upload>
 
-						{isProgress > 0 ? <Progress percent={isProgress} /> : null}
-						<Modal
-							wrapClassName='est-upload-image-camera-modal-container'
-							visible={isPreviewModal}
-							title='Preview'
-							footer={null}
-							onCancel={() => setPreviewModal(false)}>
-							{isPreviewImg && (
-								<img
-									alt='visionCloud'
-									style={{ width: '100%' }}
-									src={isPreviewImg}
-								/>
-							)}
-						</Modal>
-					</div>
-				</Card>
-				<p>{isTexto !== '' ? `Your data has been sent successfully.` : ''}</p>
-			</div>
+							{isProgress > 0 ? <Progress percent={isProgress} /> : null}
+							<Modal
+								wrapClassName='est-upload-image-camera-modal-container'
+								visible={isPreviewModal}
+								title='Preview'
+								footer={null}
+								onCancel={() => setPreviewModal(false)}>
+								{isPreviewImg && (
+									<img
+										alt='visionCloud'
+										style={{ width: '100%' }}
+										src={isPreviewImg}
+									/>
+								)}
+							</Modal>
+						</div>
+					</Card>
+					<p>{isTexto !== '' ? `Your data has been sent successfully.` : ''}</p>
+				</div>
+			)}
 		</>
 	)
 }

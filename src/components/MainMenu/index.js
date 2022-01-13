@@ -10,7 +10,12 @@ import Drawer from 'antd/lib/drawer'
 import Button from 'antd/lib/button'
 import Menu from 'antd/lib/menu'
 
-import { SafetyOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'
+import {
+	SafetyOutlined,
+	TeamOutlined,
+	UserOutlined,
+	CommentOutlined,
+} from '@ant-design/icons'
 
 import Image from '../Image'
 import ProfileImg from '../../img/detail/profile-example.png'
@@ -117,6 +122,11 @@ export default function MainMenu(props) {
 							Insurance
 						</Link>
 					</Menu.Item>
+					<Menu.Item key='/general-sms' icon={<CommentOutlined />}>
+						<Link to='/general-sms' className='est-main-menu-link'>
+							Sms
+						</Link>
+					</Menu.Item>
 				</Menu>
 			</div>
 
@@ -198,6 +208,19 @@ export default function MainMenu(props) {
 									})
 								}>
 								Insurance
+							</Link>
+						</Menu.Item>
+
+						<Menu.Item key='/profile/general-sms' icon={<CommentOutlined />}>
+							<Link
+								to='/profile/general-sms'
+								className='est-main-menu-link'
+								onClick={() =>
+									setGlobal({
+										useDrawer: false,
+									})
+								}>
+								Sms
 							</Link>
 						</Menu.Item>
 					</Menu>

@@ -4,82 +4,85 @@ import React, { useEffect, useState } from 'react'
 
 import { setGlobal, useGlobal } from 'reactn'
 
-import { Row, Col, Button, Modal, Form, Input } from 'antd'
+import { Row, Col, Button, Modal, Form, Input, Popconfirm } from 'antd'
 
-import { PoweroffOutlined } from '@ant-design/icons'
+import { FileProtectOutlined, SendOutlined } from '@ant-design/icons'
 
 import Loading from '../../../../components/Loading'
 import Image from '../../../../components/Image'
 
 import './style.css'
 
-import { GetAllInsurance, ActivateInsurance, DeleteInsurance } from './services'
+import { GetAllSms, SendSmsPatient } from './services'
 
 const SmsInfo = () => {
 	const [isMobile, setMobile] = useState(false)
 	const [update_password] = Form.useForm()
 	const [isVisible, setVisible] = useState(false)
-	const [isAllInsu, setAllInsu] = useGlobal('allInsu')
+	const [isAllSms, setAllSms] = useGlobal('allSms')
 	const [isModalInfo, setModalInfo] = useState(null)
-	const [isUpdateInsu, setUpdateInsu] = useState(false)
+	const [isUpdateSms, setUpdateSms] = useState(false)
 	const [isLoading, setLoading] = useState(false)
 	const [isFilterList, setFilterList] = useState(null)
 
-	const [isGetAllInsu] = useState({
+	const [isGetAllSms] = useState({
 		service_global_description: 'Check your internet connection',
 	})
 
-	const handleCloseManageInsu = () => {
+	const handleCloseManageSms = () => {
 		setModalInfo(null)
 		setVisible(false)
 	}
+	const handleManageSms = (item) => {
+		setVisible(true)
+		setModalInfo(item)
+	}
 
-	const handleActivateInsu = async (item) => {
-		setUpdateInsu(true)
-		let actionUser = {
-			idUser: item.id,
-			allDelete: 'no',
-		}
-		if (item.state === '1') {
-			actionUser.state = '0'
-		} else if (item.state === '0') {
-			actionUser.state = '1'
-		}
+	const handleSendSms = async (item) => {
+		setUpdateSms(true)
 
-		await ActivateInsurance(actionUser).then((response) => {
+		await SendSmsPatient(item).then((response) => {
 			if (response) {
-				GetAllInsurance(isGetAllInsu).then((response) => {
+				GetAllSms().then((response) => {
 					if (response) {
-						setAllInsu(response)
+						setAllSms(response)
 					}
 				})
 			}
 		})
-		setUpdateInsu(false)
+		setUpdateSms(false)
 	}
 
 	const handleSearchList = (item) => {
 		const filter = item.target.value
+
 		let filterList = isFilterList.filter((data) => {
+			data.phone = data.phone.toLowerCase()
 			data.name = data.name.toLowerCase()
-			return data.name.indexOf(filter) !== -1
+			data.last = data.last.toLowerCase()
+			return (
+				data.phone.indexOf(filter) !== -1 ||
+				data.name.indexOf(filter) !== -1 ||
+				data.last.indexOf(filter) !== -1
+			)
 		})
-		setAllInsu(filterList)
+		setAllSms(filterList)
 	}
 
 	useEffect(() => {
 		if (window.innerWidth < 576) {
 			setMobile(true)
 		}
-		GetAllInsurance(isGetAllInsu).then((response) => {
+
+		GetAllSms(isGetAllSms).then((response) => {
 			if (response) {
-				setAllInsu(response)
+				setAllSms(response)
 				setFilterList(response)
 			}
 		})
-	}, [setAllInsu])
+	}, [setAllSms])
 
-	if (!isAllInsu) {
+	if (!isAllSms) {
 		return <Loading />
 	} else
 		return (
@@ -98,11 +101,7 @@ const SmsInfo = () => {
 								Menu
 							</Button>
 						</Col>
-						<Col
-							xs={12}
-							className='est-general-list-create-user-responsive-button'>
-							Modal crear seguro
-						</Col>
+
 						<Col
 							xs={24}
 							className='est-general-list-users-banner-search-container'>
@@ -143,15 +142,6 @@ const SmsInfo = () => {
 							className='est-general-list-users-banner-search'
 						/>
 					</Col>
-					<Col
-						xs={24}
-						sm={4}
-						md={4}
-						lg={12}
-						xl={12}
-						className='est-general-list-create-user-container'>
-						Modal crear seguro
-					</Col>
 				</Row>
 
 				<Row className='est-general-list-users-list-main-title-container'>
@@ -167,12 +157,15 @@ const SmsInfo = () => {
 					<Col md={3} lg={3} xl={3}>
 						<h3 className='est-general-list-users-list-main-title'>Date</h3>
 					</Col>
+					<Col md={3} lg={3} xl={3}>
+						<h3 className='est-general-list-users-list-main-title'>Phone</h3>
+					</Col>
 					<Col md={5} lg={5} xl={5}>
 						<h3 className='est-general-list-users-list-main-title'>Actions</h3>
 					</Col>
 				</Row>
 				<div className='est-general-list-users-list-main-container'>
-					{isAllInsu.map((item, index) => (
+					{isAllSms.map((item, index) => (
 						<Row key={index} className='est-general-list-users-list-container'>
 							<Col
 								className='est-general-list-users-list-text-container'
@@ -187,7 +180,7 @@ const SmsInfo = () => {
 									</span>
 									<span
 										className={
-											item.state === '1'
+											item.status !== 'failed'
 												? 'est-general-list-users-title-state-active'
 												: 'est-general-list-users-title-state-disable'
 										}></span>
@@ -204,7 +197,7 @@ const SmsInfo = () => {
 									<span className='est-general-list-users-list-main-title-responsive'>
 										Id:
 									</span>
-									{item.id}
+									{item.sid}
 								</h4>
 							</Col>
 
@@ -219,7 +212,7 @@ const SmsInfo = () => {
 									<span className='est-general-list-users-list-main-title-responsive'>
 										Name:
 									</span>
-									{item.name}
+									{item.name} {item.last}
 								</h4>
 							</Col>
 
@@ -227,9 +220,9 @@ const SmsInfo = () => {
 								className='est-general-list-users-list-text-container'
 								xs={24}
 								sm={24}
-								md={6}
-								lg={6}
-								xl={6}>
+								md={4}
+								lg={4}
+								xl={4}>
 								<h4 className='est-general-list-users-title'>
 									<span className='est-general-list-users-list-main-title-responsive'>
 										Date:
@@ -237,26 +230,54 @@ const SmsInfo = () => {
 									{item.date_creation}
 								</h4>
 							</Col>
+							<Col
+								className='est-general-list-users-list-text-container'
+								xs={24}
+								sm={24}
+								md={4}
+								lg={4}
+								xl={4}>
+								<h4 className='est-general-list-users-title'>
+									<span className='est-general-list-users-list-main-title-responsive'>
+										Phone:
+									</span>
+									{item.phone}
+								</h4>
+							</Col>
 
 							<Col
 								xs={24}
 								sm={24}
-								md={5}
-								lg={5}
-								xl={5}
+								md={2}
+								lg={2}
+								xl={2}
 								className='est-general-list-users-list-text-container'>
 								<h4 className='est-general-list-users-title'>
 									<span className='est-general-list-users-list-main-title-responsive'>
 										Actions:
 									</span>
 									<Row className='est-users-manage-list-button-container'>
-										<Col>Modal editar</Col>
+										{item.status === 'failed' && (
+											<Col>
+												<Popconfirm
+													placement='top'
+													title='Do you want to forward the message?'
+													onConfirm={() => handleSendSms(item)}
+													okText='Yes'
+													cancelText='No'>
+													<Button
+														loading={isUpdateSms}
+														icon={<SendOutlined />}
+														className='est-users-manage-list-button-disable-user-button'></Button>
+												</Popconfirm>
+											</Col>
+										)}
 										<Col>
 											<Button
-												loading={isUpdateInsu}
-												icon={<PoweroffOutlined />}
+												loading={isUpdateSms}
+												icon={<FileProtectOutlined />}
 												className='est-users-manage-list-button-disable-user-button'
-												onClick={() => handleActivateInsu(item)}></Button>
+												onClick={() => handleManageSms(item)}></Button>
 										</Col>
 									</Row>
 								</h4>
@@ -264,12 +285,13 @@ const SmsInfo = () => {
 						</Row>
 					))}
 				</div>
+
 				<Modal
 					wrapClassName='est-manage-users-modal-global-container'
 					centered
-					title={'Manage insurance'}
+					title={'Manage Sms'}
 					visible={isVisible}
-					onCancel={() => handleCloseManageInsu()}
+					onCancel={() => handleCloseManageSms()}
 					cancelButtonProps={{ style: { display: 'none' } }}
 					okButtonProps={{ style: { display: 'none' } }}
 					okText=''
@@ -280,9 +302,9 @@ const SmsInfo = () => {
 							<Col
 								xs={24}
 								sm={24}
-								md={isModalInfo.modo === 'directo' ? 12 : 24}
-								lg={isModalInfo.modo === 'directo' ? 12 : 24}
-								xl={isModalInfo.modo === 'directo' ? 12 : 24}
+								md={24}
+								lg={24}
+								xl={24}
 								className='est-manage-users-modal-main-container'>
 								<div
 									className={`${
@@ -292,9 +314,9 @@ const SmsInfo = () => {
 									} est-manage-users-modal-title-container`}>
 									<h4 className='est-manage-users-modal-title'>
 										<span className='est-manage-users-modal-title-span'>
-											ID:
+											Sid Twilio:
 										</span>{' '}
-										{isModalInfo.id}
+										{isModalInfo.sid}
 									</h4>
 
 									<h4 className='est-manage-users-modal-title'>
@@ -312,10 +334,36 @@ const SmsInfo = () => {
 
 									<h4 className='est-manage-users-modal-title'>
 										<span className='est-manage-users-modal-title-span'>
+											Body:
+										</span>{' '}
+										{isModalInfo.message}
+									</h4>
+
+									<h4 className='est-manage-users-modal-title'>
+										<span className='est-manage-users-modal-title-span'>
 											Account status:
 										</span>{' '}
-										{isModalInfo.state === '1' ? `Active` : `Inactive`}
+										{isModalInfo.status === 'failed' ? `Failed` : `Delivered`}
 									</h4>
+								</div>
+							</Col>
+							<Col span={12} className='est-login-form-upload-photo-container'>
+								<div className='est-profile-edit-modal-image-text-container'>
+									{isModalInfo.url_photo_doctor && (
+										<>
+											<h4 className='est-profile-edit-modal-image-text'>
+												Doctor photo:
+											</h4>
+											<div className='est-profile-edit-modal-image-container'>
+												<Image
+													classImg={'est-profile-edit-modal-image'}
+													image={isModalInfo.url_photo_doctor}
+													alt={'Imagen Doctor'}
+													title={'Imagen Doctor'}
+												/>
+											</div>
+										</>
+									)}
 								</div>
 							</Col>
 						</Row>
@@ -323,7 +371,7 @@ const SmsInfo = () => {
 					<div className='est-manage-users-modal-button-container'>
 						<Button
 							className='est-manage-users-modal-button'
-							onClick={() => handleCloseManageInsu()}>
+							onClick={() => handleCloseManageSms()}>
 							Close
 						</Button>
 					</div>
@@ -331,4 +379,4 @@ const SmsInfo = () => {
 			</>
 		)
 }
-export default InsuranceInfo
+export default SmsInfo

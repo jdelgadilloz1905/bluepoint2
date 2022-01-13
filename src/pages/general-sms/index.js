@@ -11,7 +11,7 @@ import Loading from '../../components/Loading'
 
 import { GetUserInfo } from '../../components/Hooks/Functions/GetUserInfo'
 
-import InsuranceInfo from './components/InsuranceInfo'
+import SmsInfo from './components/SmsInfo'
 
 import './style.css'
 
@@ -57,7 +57,7 @@ const GeneralSms = () => {
 								<MainMenu user={isDataProfile} />
 							</div>
 							<div className='est-profile-info-container'>
-								<InsuranceInfo />
+								<SmsInfo />
 							</div>
 						</div>
 					</div>
@@ -66,4 +66,4 @@ const GeneralSms = () => {
 		)
 	}
 }
-export default GeneralInsurance
+export default GeneralSms
