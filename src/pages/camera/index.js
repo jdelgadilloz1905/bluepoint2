@@ -119,7 +119,9 @@ export default function App(props) {
 			)
 			if (response.data.statusCode === 200) {
 				setPreviewImg(response.data.url + response.data.imageInfo[0].file)
-
+				console.log(
+					'subi la foto y ahora valido con google la extraccion de texto'
+				)
 				await submitToGoogle(response.data.imageInfo[0].file)
 				onSuccess('Ok')
 				message.success('Ok')
@@ -139,6 +141,7 @@ export default function App(props) {
 	}
 
 	const registerDataPatient = async (item, image) => {
+		//Registrar informacion de la tarjeta subida por el paciente
 		servicesCamera
 			.registerDatosPatient(item, isDatosuser, image)
 			.then((response) => {

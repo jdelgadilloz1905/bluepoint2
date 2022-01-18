@@ -33,6 +33,7 @@ const servicesCamera = {
 		return returnResponse
 	},
 	async getDatosPatient(item) {
+		console.log('datos del usuario ', `${ENV_CORE}/api/auth/datos-user`)
 		let returnResponse
 		await axios({
 			method: 'POST',
